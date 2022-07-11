@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import { CredentialResponse, fetchCredential } from "../lib/api";
-import { defaultStepStatus } from "../lib/utils";
+import { defaultStepStatus, StatusMessage, StatusMessageType } from "../lib/utils";
 import useWeb3 from "../hooks/web3";
 
 const MESSAGE = `I authorize Defistarter (dc3aa1910acbb7ff4d22c07e43a6926adc3a81305a9355a304410048c9a91afd) to get a proof from Fractal that:
@@ -9,7 +9,8 @@ const MESSAGE = `I authorize Defistarter (dc3aa1910acbb7ff4d22c07e43a6926adc3a81
 - I am not a citizen of the following countries: Germany (DE)
 - I am not a resident of the following countries: Canada (CA), United States of America (US)`;
 
-export const Proof = ({ setCredentialResponse }: { setCredentialResponse: (CredentialResponse) => void }) => {
+export const Proof = ({ setCredentialResponse, setStatusMessage }:
+  { setCredentialResponse: (c: CredentialResponse) => void, setStatusMessage: (s: StatusMessage) => void }) => {
   const { account, library } = useWeb3();
 
   const [signatureStatus, setSignatureStatus] = useState(defaultStepStatus);
@@ -46,9 +47,18 @@ export const Proof = ({ setCredentialResponse }: { setCredentialResponse: (Crede
       const body = await res.json() as CredentialResponse;
       setCredentialResponse(body);
       setApiCallStatus((status) => ({ ...status, loading: false, data: { body, status: res.status } }));
+      updateStatusMessage(res.status);
     } catch (err) {
       setApiCallStatus((status) => ({ ...status, loading: false, error: err }));
     }
+  };
+
+  const updateStatusMessage = (status) => {
+    let credentialStatus: StatusMessageType = "NOT_APPROVED";
+    if (status === 200) {
+      credentialStatus = "APPROVED";
+    }
+    setStatusMessage({ status: credentialStatus, data: { address: account } });
   };
 
   return (

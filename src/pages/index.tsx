@@ -1,14 +1,17 @@
 import React, { useState } from "react";
 
 import { CredentialResponse } from "../lib/api";
+import { StatusMessage as StatusMessageT } from "../lib/utils";
 import Connect from "../components/Connect";
 import Transact from "../components/Transact";
 import Proof from "../components/Proof";
+import StatusMessage from "../components/StatusMessage";
 import useWeb3 from "../hooks/web3";
 
 const IndexPage = () => {
   const { active } = useWeb3();
   const [credentialResponse, setCredentialResponse] = useState<CredentialResponse | undefined>(undefined);
+  const [statusMessage, setStatusMessage] = useState<StatusMessageT>({ status: "NO_MESSAGE" });
 
   return (
     <main>
@@ -21,13 +24,16 @@ const IndexPage = () => {
       {active &&
         <>
           <div>
-            <Proof setCredentialResponse={setCredentialResponse} />
+            <Proof setCredentialResponse={setCredentialResponse} setStatusMessage={setStatusMessage} />
           </div>
           <div>
-            <Transact credentialResponse={credentialResponse} />
+            <Transact credentialResponse={credentialResponse} setStatusMessage={setStatusMessage} />
           </div>
         </>
       }
+      <div>
+        <StatusMessage status={statusMessage} />
+      </div>
     </main>
   );
 };

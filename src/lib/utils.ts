@@ -9,3 +9,10 @@ export const defaultStepStatus : StepStatus = {
   error: undefined,
   data: {},
 };
+
+export type StatusMessageType = "NO_MESSAGE" | "APPROVED" | "NOT_APPROVED" | "TX_SUCCESS" | "TX_ERROR";
+
+export interface StatusMessage {
+  status: StatusMessageType;
+  data: Record<string, any>;
+}
