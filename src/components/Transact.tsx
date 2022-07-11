@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { useWeb3React } from "@web3-react/core";
-import { Contract, providers } from "ethers";
+import { Contract } from "ethers";
 
 import contractABI from "../assets/abi.json";
 import { CredentialResponse } from "../lib/api";
 import { defaultStepStatus } from "../lib/utils";
+import useWeb3 from "../hooks/web3";
 
 const CONTRACT_ADDRESS = "0xe951816A54aB27Cf76c22448bEc49a2765940E18";
 const DEFAULT_PROOF_STR = "0x0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000";
@@ -13,8 +13,7 @@ const DEFAULT_VALID_UNTIL = DEFAULT_APPROVED_AT + (24 * 60 * 60); // now + 1 day
 const DEFAULT_FRACTAL_ID = "0x0000000000000000000000000000000000000000000000000000000000000000";
 
 export const Transact = ({ credentialResponse }: { credentialResponse: CredentialResponse | undefined }) => {
-  const web3 = useWeb3React<providers.Web3Provider>();
-  const { library } = web3;
+  const { library } = useWeb3();
 
   const [txStatus, setTxStatus] = useState(defaultStepStatus);
 
@@ -46,6 +45,9 @@ export const Transact = ({ credentialResponse }: { credentialResponse: Credentia
   return (
     <div>
       <button onClick={transact}>Make transaction</button>
+      {txStatus.error &&
+        <p>Transaction failed</p>
+      }
       {transaction &&
         <div>
           <a href={getTransactionURL()} target="_blank" rel="noreferrer">See on Etherscan</a>

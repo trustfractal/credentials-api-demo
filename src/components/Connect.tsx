@@ -1,15 +1,14 @@
 import React from "react";
-import { useWeb3React } from "@web3-react/core";
 import { InjectedConnector } from "@web3-react/injected-connector";
-import { providers } from "ethers";
+
+import useWeb3 from "../hooks/web3";
 
 const GOERLI_CHAIN_ID = 5;
 
 const injectedConnector = new InjectedConnector({});
 
 export const Connect = () => {
-  const web3 = useWeb3React<providers.Web3Provider>();
-  const { activate, active, account, chainId, deactivate } = web3;
+  const { activate, active, account, chainId, deactivate } = useWeb3();
 
   const connect = async () => {
     try {

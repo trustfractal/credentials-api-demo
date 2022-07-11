@@ -1,15 +1,13 @@
 import React, { useState } from "react";
-import { useWeb3React } from "@web3-react/core";
-import { providers } from "ethers";
 
 import { CredentialResponse } from "../lib/api";
 import Connect from "../components/Connect";
 import Transact from "../components/Transact";
 import Proof from "../components/Proof";
+import useWeb3 from "../hooks/web3";
 
 const IndexPage = () => {
-  const web3 = useWeb3React<providers.Web3Provider>();
-  const { active } = web3;
+  const { active } = useWeb3();
   const [credentialResponse, setCredentialResponse] = useState<CredentialResponse | undefined>(undefined);
 
   return (

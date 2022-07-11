@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
 
-import { useWeb3React } from "@web3-react/core";
-import { providers } from "ethers";
-
 import { CredentialResponse, fetchCredential } from "../lib/api";
 import { defaultStepStatus } from "../lib/utils";
+import useWeb3 from "../hooks/web3";
 
 const MESSAGE = `I authorize Defistarter (dc3aa1910acbb7ff4d22c07e43a6926adc3a81305a9355a304410048c9a91afd) to get a proof from Fractal that:
 - I passed KYC level plus
@@ -12,11 +10,10 @@ const MESSAGE = `I authorize Defistarter (dc3aa1910acbb7ff4d22c07e43a6926adc3a81
 - I am not a resident of the following countries: Canada (CA), United States of America (US)`;
 
 export const Proof = ({ setCredentialResponse }: { setCredentialResponse: (CredentialResponse) => void }) => {
-  const web3 = useWeb3React<providers.Web3Provider>();
+  const { account, library } = useWeb3();
+
   const [signatureStatus, setSignatureStatus] = useState(defaultStepStatus);
   const [apiCallStatus, setApiCallStatus] = useState(defaultStepStatus);
-
-  const { account, library } = web3;
 
   const { signature } = signatureStatus.data;
   const { body, status } = apiCallStatus.data;
