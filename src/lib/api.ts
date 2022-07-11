@@ -1,4 +1,4 @@
-const BASE_URL = "https://resource.staging.sandbox.fractal.id/credentials";
+const BASE_URL = "https://credentials.staging.sandbox.fractal.id";
 
 export interface CredentialResponse {
   address?: string;
