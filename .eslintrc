@@ -126,6 +126,7 @@
   "overrides": [
     {
       "files": ["src/**/*.ts", "src/**/*.tsx"],
+      "excludedFiles": ["src/components/ui/**/*.ts", "src/components/ui/**/*.tsx"],
 
       "parser": "@typescript-eslint/parser",
 

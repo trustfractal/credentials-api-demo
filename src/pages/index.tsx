@@ -1,12 +1,34 @@
 import React, { useState } from "react";
+import styled from "styled-components";
 
 import { CredentialResponse } from "../lib/api";
 import { StatusMessage as StatusMessageT } from "../lib/utils";
-import Connect from "../components/Connect";
-import Transact from "../components/Transact";
-import Proof from "../components/Proof";
-import StatusMessage from "../components/StatusMessage";
+import Connect from "../components/ActionPage/Connect";
+import Transact from "../components/ActionPage/Transact";
+import Proof from "../components/ActionPage/Proof";
+import StatusMessage from "../components/ActionPage/StatusMessage";
 import useWeb3 from "../hooks/web3";
+
+import { Layout } from "../components/ui";
+import About from "../components/ActionPage/About";
+import CallToAction from "../components/ActionPage/CallToAction";
+import Footer from "../components/ActionPage/Footer";
+import Hero from "../components/ActionPage/Hero";
+import Header from "../components/ActionPage/Header";
+import News from "../components/ActionPage/News";
+import Socials from "../components/ActionPage/Socials";
+
+const HeroContainer = styled.section`
+  background: linear-gradient(
+    0deg,
+    rgba(209, 151, 255, 0.13),
+    rgba(209, 151, 255, 0.13)
+  );
+  
+  @media(min-width: 768px) {
+    border-radius: 0% 100% 100% 0% / 100% 0% 100% 0%;
+  }
+`;
 
 const IndexPage = () => {
   const { active } = useWeb3();
@@ -15,6 +37,17 @@ const IndexPage = () => {
 
   return (
     <main>
+      <Layout>
+        <HeroContainer>
+          <Header />
+          <Hero />
+        </HeroContainer>
+        <About />
+        <Socials />
+        <News />
+        <CallToAction />
+        <Footer />
+      </Layout>
       <h1>
         Action Page
       </h1>

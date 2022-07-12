@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Contract } from "ethers";
 
-import contractABI from "../assets/abi.json";
-import { CredentialResponse } from "../lib/api";
-import { defaultStepStatus, StatusMessage } from "../lib/utils";
-import useWeb3 from "../hooks/web3";
+import contractABI from "../../assets/abi.json";
+import { CredentialResponse } from "../../lib/api";
+import { defaultStepStatus, StatusMessage } from "../../lib/utils";
+import useWeb3 from "../../hooks/web3";
 
 const CONTRACT_ADDRESS = "0xe951816A54aB27Cf76c22448bEc49a2765940E18";
 const DEFAULT_PROOF_STR = "0x0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000";

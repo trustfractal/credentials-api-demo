@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 
-import { CredentialResponse, fetchCredential } from "../lib/api";
-import { defaultStepStatus, StatusMessage, StatusMessageType } from "../lib/utils";
-import useWeb3 from "../hooks/web3";
+import { CredentialResponse, fetchCredential } from "../../lib/api";
+import { defaultStepStatus, StatusMessage, StatusMessageType } from "../../lib/utils";
+import useWeb3 from "../../hooks/web3";
 
 const MESSAGE = `I authorize Defistarter (dc3aa1910acbb7ff4d22c07e43a6926adc3a81305a9355a304410048c9a91afd) to get a proof from Fractal that:
 - I passed KYC level plus

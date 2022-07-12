@@ -1,7 +1,7 @@
 import React from "react";
 import { InjectedConnector } from "@web3-react/injected-connector";
 
-import useWeb3 from "../hooks/web3";
+import useWeb3 from "../../hooks/web3";
 
 const GOERLI_CHAIN_ID = 5;
 

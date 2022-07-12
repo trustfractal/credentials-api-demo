@@ -1,6 +1,6 @@
 import React from "react";
 
-import { StatusMessage as StatusMessageT } from "../lib/utils";
+import { StatusMessage as StatusMessageT } from "../../lib/utils";
 
 const getMessage = (statusMessage: StatusMessageT) => {
   const { status, data } = statusMessage;
