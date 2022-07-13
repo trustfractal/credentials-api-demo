@@ -9,6 +9,7 @@ const RootContainer = styled.div`
     padding: 50px 122px 50px 122px;
 
     max-width: 1440px;
+    margin: 0px auto;
   }
 `;
 

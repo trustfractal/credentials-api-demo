@@ -56,6 +56,8 @@ export default function Image(props) {
     `,
   );
 
+  console.log(data);
+
   const image = getImage(data[name]);
 
   return (

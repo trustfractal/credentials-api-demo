@@ -2,9 +2,10 @@ import type { GatsbyConfig } from "gatsby";
 
 const config: GatsbyConfig = {
   siteMetadata: {
-    title: `credentials-api-demo`,
+    title: `Credentials API demo`,
     siteUrl: `https://www.credentials-api.fractal.id`,
-    author: "@tiagofragoso",
+    author: "@trustfractal",
+    image: "/static/icons/favicon-32x32.png",
   },
   // More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.
   // If you use VSCode you can also use the GraphQL plugin
@@ -14,7 +15,7 @@ const config: GatsbyConfig = {
     resolve: 'gatsby-source-filesystem',
     options: {
       "name": "images",
-      "path": "./src/assets/images/"
+      "path": `${__dirname}/src/assets/images/`
     },
     __key: "images"
   },
@@ -25,6 +26,18 @@ const config: GatsbyConfig = {
         include: /assets/
       }
     }
+  },
+  {
+    resolve: `gatsby-plugin-manifest`,
+    options: {
+      name: `Credentials API demo`,
+      short_name: `creditentials-api`,
+      start_url: `/`,
+      background_color: `#FFFFFF`,
+      theme_color: `#FFFFFF`,
+      display: `minimal-ui`,
+      icon: `src/assets/images/logo.png`, // This path is relative to the root of the site.
+    },
   }]
 };
 
