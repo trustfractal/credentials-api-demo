@@ -6,7 +6,7 @@ import { GatsbyImage, getImage } from "gatsby-plugin-image";
 
 const RootContainer = styled.div`
   ${(props) =>
-    props.clickable &&
+  props.clickable &&
     css`
       cursor: pointer;
     `}

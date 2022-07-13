@@ -9,7 +9,7 @@ import Twitter from "../../assets/icons/twitter.svg";
 
 const RootContainer = styled.div`
   ${(props) =>
-    props.clickable &&
+  props.clickable &&
     css`
       cursor: pointer;
     `}

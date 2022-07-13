@@ -27,7 +27,7 @@ transform: scale(1);
 
 :hover {
   ${(props) =>
-    !props.disabled &&
+  !props.disabled &&
     !props.loading &&
     css`
       opacity: 0.8;
@@ -35,7 +35,7 @@ transform: scale(1);
 }
 
 ${(props) =>
-    props.alt === "true" &&
+      props.alt === "true" &&
     css`
     background-color: var(--c-light-pink);
     box-shadow: 0px 3px 3px var(--c-pink);
@@ -49,19 +49,19 @@ ${(props) =>
   `}
 
 ${(props) =>
-    props.height !== undefined &&
+      props.height !== undefined &&
     css`
     height: ${props.height};
   `}
 
 ${(props) =>
-    props.width !== undefined &&
+      props.width !== undefined &&
     css`
     width: ${props.width};
   `}
 
 ${(props) =>
-    props.disabled &&
+      props.disabled &&
     css`
     opacity: 0.4;
     background-color: var(--c-red);

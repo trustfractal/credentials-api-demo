@@ -24,13 +24,13 @@ justify-content: flex-start;
 box-shadow: 3px 3px 14px 0px rgba(231,205,252,1);
 
 ${(props) =>
-    props.height !== undefined &&
+  props.height !== undefined &&
     css`
     height: ${props.height};
   `}
 
 ${(props) =>
-    props.width !== undefined &&
+      props.width !== undefined &&
     css`
     width: ${props.width};
   `}
@@ -82,5 +82,5 @@ export default function Card(props) {
       {title && <CardTitle title={title} />}
       <CardContent {...props} />
     </CardContainer>
-  )
+  );
 }

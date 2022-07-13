@@ -19,7 +19,7 @@ export const TextWeights = {
 
 const TextContainer = styled.p`
   ${(props) =>
-    css`
+  css`
       font-size: ${props.size};
       line-height: ${props.size};
       font-weight: ${props.weight};
