@@ -16,3 +16,5 @@ export interface StatusMessage {
   status: StatusMessageType;
   data: Record<string, any>;
 }
+
+export const GOERLI_CHAIN_ID = 5;

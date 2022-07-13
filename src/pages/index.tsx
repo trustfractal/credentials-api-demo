@@ -1,13 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
-
-import { CredentialResponse } from "../lib/api";
-import { StatusMessage as StatusMessageT } from "../lib/utils";
-import Connect from "../components/ActionPage/Connect";
-import Transact from "../components/ActionPage/Transact";
-import Proof from "../components/ActionPage/Proof";
-import StatusMessage from "../components/ActionPage/StatusMessage";
-import useWeb3 from "../hooks/web3";
 
 import { Layout } from "../components/ui";
 import About from "../components/ActionPage/About";
@@ -30,46 +22,20 @@ const HeroContainer = styled.section`
   }
 `;
 
-const IndexPage = () => {
-  const { active } = useWeb3();
-  const [credentialResponse, setCredentialResponse] = useState<CredentialResponse | undefined>(undefined);
-  const [statusMessage, setStatusMessage] = useState<StatusMessageT>({ status: "NO_MESSAGE" });
+const IndexPage = () => (
+  <Layout>
+    <HeroContainer>
+      <Header />
+      <Hero />
+    </HeroContainer>
+    <About />
+    <Socials />
+    <News />
+    <CallToAction />
+    <Footer />
+  </Layout>
+);
 
-  return (
-    <main>
-      <Layout>
-        <HeroContainer>
-          <Header />
-          <Hero />
-        </HeroContainer>
-        <About />
-        <Socials />
-        <News />
-        <CallToAction />
-        <Footer />
-      </Layout>
-      <h1>
-        Action Page
-      </h1>
-      <div>
-        <Connect />
-      </div>
-      {active &&
-        <>
-          <div>
-            <Proof setCredentialResponse={setCredentialResponse} setStatusMessage={setStatusMessage} />
-          </div>
-          <div>
-            <Transact credentialResponse={credentialResponse} setStatusMessage={setStatusMessage} />
-          </div>
-        </>
-      }
-      <div>
-        <StatusMessage status={statusMessage} />
-      </div>
-    </main>
-  );
-};
 // const [messageSignatureLoading, setmessageSignatureLoading] = useState(false);
 // const [messageSignature, setMessageSignature] = useState<string | undefined>(undefined);
 // const [apiCallLoading, setApiCallLoading] = useState(false);

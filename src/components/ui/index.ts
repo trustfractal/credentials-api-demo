@@ -1,4 +1,5 @@
 import Button from "./Button";
+import Card from "./Card";
 import Head from "./Head";
 import Icon from "./Icon";
 import Image from "./Image";
@@ -11,6 +12,7 @@ import TopComponent from "./TopComponent";
 
 export {
   Button,
+  Card,
   Head,
   Icon,
   Image,

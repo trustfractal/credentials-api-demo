@@ -1,8 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
-import { Button, Text, Title, TopComponent } from "../ui";
-import { TextSizes, TextWeights } from "../ui/Text";
+import { Text, Title, TopComponent } from "../ui";
+import { TextWeights } from "../ui/Text";
+
+import useWeb3 from "../../hooks/web3";
+import Connect from "./Connect";
+import StatusMessage from "./StatusMessage";
+import Proof from "./Proof";
+import Transact from "./Transact";
+
+import { CredentialResponse } from "../../lib/api";
+import { StatusMessage as StatusMessageT } from "../../lib/utils";
 
 import HeroDots from "../../assets/images/hero_dots.svg";
 
@@ -23,7 +32,6 @@ const HeroContainer = styled.div`
   @media(min-width: 768px) {
     display: block; 
     margin-bottom: 100px;
-    width: 50%;
   }
 `;
 const HeroDotsContainer = styled.div`
@@ -37,6 +45,28 @@ const HeroDotsContainer = styled.div`
   width: 100vw;
 `;
 
+const HeroRow = styled.div`
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+
+  @media(min-width: 768px) {
+    text-align: left;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 50px;
+  }
+`;
+
+const HeroTitleColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  @media(min-width: 768px) {
+    width: 50%;
+  }
+`;
+
 const TitleContainer = styled.div`
   margin-bottom: 29px;
   text-align: center;
@@ -46,45 +76,26 @@ const TitleContainer = styled.div`
   }
 `;
 
-const ButtonsContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+const SubtitleContainer = styled.div`
+  margin-bottom: 29px;
+  text-align: center;
 
   @media(min-width: 768px) {
-    display: block;
+    text-align: left;
   }
-`;
 
-const MainButtonContainer = styled.div`
-  margin-bottom: 30px;
-  
-  @media(min-width: 768px) {
-    margin-bottom: 15px;
-  } 
-`;
-
-const SecundaryButtonContainer = styled.div`
-  margin-bottom: 22px;
-`;
-
-const Label = styled.div`
-  min-width: 250px;
-  padding: 0 10px;
-  background-color: var(--c-orange);
-  color: var(--c-white);
-  border-radius: 10px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  user-select: none;
-  @media(min-width: 768px) {
-    padding: 0;
+  // keep <p> height when empty
+  p:empty::before {
+    content: "";
+    display: inline-block;
   }
 `;
 
 export default function Hero() {
+  const { active } = useWeb3();
+  const [credentialResponse, setCredentialResponse] = useState<CredentialResponse | undefined>(undefined);
+  const [statusMessage, setStatusMessage] = useState<StatusMessageT>({ status: "NO_MESSAGE" });
+
   return (
     <HeroSection>
       <HeroDotsContainer>
@@ -92,25 +103,28 @@ export default function Hero() {
       </HeroDotsContainer>
       <TopComponent>
         <HeroContainer>
-          <TitleContainer>
-            <Title>Cross-chain crowdfunding platform</Title>
-          </TitleContainer>
-          <ButtonsContainer>
-            <MainButtonContainer>
-              <Label>
-                <Text size={TextSizes.EXTRA_SMALL} weight={TextWeights.BOLD}>
-                  Welcome
+          <HeroRow>
+            <HeroTitleColumn>
+              <TitleContainer>
+                <Title>Experience the easiest web3 KYC flow with Fractal</Title>
+              </TitleContainer>
+              <SubtitleContainer>
+                <Text>
+                  Existing Fractal users (we have 1M and counting) can be onboarded instantly
                 </Text>
-              </Label>
-            </MainButtonContainer>
-            <SecundaryButtonContainer>
-              <Button>
-                <Text size={TextSizes.EXTRA_SMALL}>
-                  Logout
+              </SubtitleContainer>
+              <SubtitleContainer>
+                <Text weight={TextWeights.BOLD}>
+                  {active ? <StatusMessage status={statusMessage} /> : "Connect your wallet to get started!"}
                 </Text>
-              </Button>
-            </SecundaryButtonContainer>
-          </ButtonsContainer>
+              </SubtitleContainer>
+            </HeroTitleColumn>
+            <Connect />
+          </HeroRow>
+          <HeroRow>
+            <Proof setCredentialResponse={setCredentialResponse} setStatusMessage={setStatusMessage} />
+            <Transact credentialResponse={credentialResponse} setStatusMessage={setStatusMessage} />
+          </HeroRow>
         </HeroContainer>
       </TopComponent>
     </HeroSection>

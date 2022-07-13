@@ -6,7 +6,7 @@ const RootContainer = styled.div`
   padding: 20px;
 
   @media(min-width: 768px) {
-    padding: 100px 122px 100px 122px;
+    padding: 50px 122px 50px 122px;
 
     max-width: 1440px;
   }

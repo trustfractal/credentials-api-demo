@@ -31,7 +31,6 @@ transform: scale(1);
     !props.loading &&
     css`
       opacity: 0.8;
-      transform: scale(1.05);
     `}
 }
 
