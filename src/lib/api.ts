@@ -1,4 +1,4 @@
-const BASE_URL = "https://credentials.staging.sandbox.fractal.id";
+import { CREDENTIALS_BASE_URL } from "./config";
 
 export interface CredentialResponse {
   address?: string;
@@ -11,6 +11,6 @@ export interface CredentialResponse {
 
 export const fetchCredential = (message: string, signature: string) => {
   const encMessage = encodeURIComponent(message);
-  const url = `${BASE_URL}?message=${encMessage}&signature=${signature}`;
+  const url = `${CREDENTIALS_BASE_URL}?message=${encMessage}&signature=${signature}`;
   return fetch(url);
 };

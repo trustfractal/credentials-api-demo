@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 import { Button, Subtitle, Text, TopComponent } from "../ui";
 import { TextSizes, TextWeights } from "../ui/Text";
+import { DOCS_URL } from "../../lib/config";
 
 const AboutSection = styled.section``;
 const AboutContainer = styled.div`
@@ -38,20 +39,19 @@ export default function About() {
       <TopComponent>
         <AboutContainer>
           <TitleContainer>
-            <Subtitle>About Defistarter</Subtitle>
+            <Subtitle>About this demo</Subtitle>
           </TitleContainer>
           <TextContainer>
             <Text size={TextSizes.MEDIUM}>
-              Defistarter is a fully functional ecosystem built to enable
-              projects to raise capital on a decentralized environment and
-              connect investors with promising projects from their earliest
-              stages
+              This page is the frontend to a dApp that requires KYC. Normally you wouldn’t even see the “Make transaction”
+              button until you’re KYC-approved, but we’re showing it already so you can test that it only succeeds if you’re
+              approved. It’s connected to a smart contract that needs to verify your approval before proceeding.
             </Text>
           </TextContainer>
           <ButtonContainer>
-            <Button>
+            <Button href={DOCS_URL} target="_blank" rel="noreferrer">
               <Text size={TextSizes.SMALL} weight={TextWeights.BOLD}>
-                Learn more
+                Developer documentation
               </Text>
             </Button>
           </ButtonContainer>

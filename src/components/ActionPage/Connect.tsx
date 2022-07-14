@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { InjectedConnector } from "@web3-react/injected-connector";
 
 import useWeb3 from "../../hooks/web3";
 import { Button, Card, Text } from "../ui";
 import { TextSizes } from "../ui/Text";
-import { GOERLI_CHAIN_ID } from "../../lib/utils";
+import { GOERLI_CHAIN_ID } from "../../lib/constants";
 
 const injectedConnector = new InjectedConnector({});
 
@@ -25,7 +25,17 @@ const InfoTextContiner = styled.div`
 `;
 
 export const Connect = () => {
-  const { activate, active, account, chainId, deactivate } = useWeb3();
+  const { activate, active, account, chainId, deactivate, library } = useWeb3();
+
+  useEffect(() => {
+    const checkChain = () => {
+      if (active && chainId !== GOERLI_CHAIN_ID) {
+        void switchToGoerliChain();
+      }
+    };
+
+    checkChain();
+  }, [active]);
 
   const connect = async () => {
     try {
@@ -34,6 +44,16 @@ export const Connect = () => {
     } catch (error) {
       console.error(error);
     }
+  };
+
+  const switchToGoerliChain = () => {
+    if (library && library.provider) {
+      return library.provider.request({
+        method: "wallet_switchEthereumChain",
+        params: [{ chainId: `0x${GOERLI_CHAIN_ID}` }],
+      });
+    }
+    return Promise.reject();
   };
 
   const shortAddress = account ? `${account.substring(0, 5)}...${account.substring(38)}` : "";

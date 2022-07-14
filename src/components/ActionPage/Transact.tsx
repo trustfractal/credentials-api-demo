@@ -4,16 +4,12 @@ import styled from "styled-components";
 
 import contractABI from "../../assets/abi.json";
 import { CredentialResponse } from "../../lib/api";
-import { defaultStepStatus, StatusMessage, GOERLI_CHAIN_ID } from "../../lib/utils";
+import { defaultStepStatus, StatusMessage } from "../../lib/utils";
+import { CONTRACT_ADDRESS } from "../../lib/config";
+import { DEFAULT_PROOF, DEFAULT_APPROVED_AT, DEFAULT_VALID_UNTIL, DEFAULT_FRACTAL_ID } from "../../lib/constants";
 import { Card, Button } from "../ui";
 import useWeb3 from "../../hooks/web3";
 import Step from "./Step";
-
-const CONTRACT_ADDRESS = "0xe951816A54aB27Cf76c22448bEc49a2765940E18";
-const DEFAULT_PROOF_STR = "0x0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000";
-const DEFAULT_APPROVED_AT = Math.floor(Date.now() / 1000); // now
-const DEFAULT_VALID_UNTIL = DEFAULT_APPROVED_AT + (24 * 60 * 60); // now + 1 day
-const DEFAULT_FRACTAL_ID = "0x0000000000000000000000000000000000000000000000000000000000000000";
 
 const CardBodyContainer = styled.div`
   display: flex;
@@ -40,7 +36,7 @@ const TransactionSuccessContainer = styled.a`
 
 export const Transact = ({ credentialResponse, setStatusMessage }:
   { credentialResponse: CredentialResponse | undefined, setStatusMessage: (s: StatusMessage) => void }) => {
-  const { active, chainId, library } = useWeb3();
+  const { active, library } = useWeb3();
 
   const [txStatus, setTxStatus] = useState(defaultStepStatus);
   const [credentialStatus, setCredentialstatus] = useState(defaultStepStatus);
@@ -53,7 +49,7 @@ export const Transact = ({ credentialResponse, setStatusMessage }:
     }
   }, [credentialResponse]);
 
-  let proof = DEFAULT_PROOF_STR, validUntil = DEFAULT_VALID_UNTIL, approvedAt = DEFAULT_APPROVED_AT, fractalId = DEFAULT_FRACTAL_ID;
+  let proof = DEFAULT_PROOF, validUntil = DEFAULT_VALID_UNTIL, approvedAt = DEFAULT_APPROVED_AT, fractalId = DEFAULT_FRACTAL_ID;
   if (credentialResponse?.proof) {
     ({ proof, validUntil, approvedAt, fractalId } = credentialResponse);
   }
@@ -62,10 +58,6 @@ export const Transact = ({ credentialResponse, setStatusMessage }:
 
   const transact = async () => {
     setTxStatus((status) => ({ ...status, loading: true }));
-    if (chainId !== GOERLI_CHAIN_ID) {
-      await switchToGoerliChain();
-    }
-
     const contract = new Contract(CONTRACT_ADDRESS, contractABI, library?.getSigner());
 
     try {
@@ -82,16 +74,6 @@ export const Transact = ({ credentialResponse, setStatusMessage }:
     if (!transaction) return "";
     // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
     return `https://goerli.etherscan.io/tx/${transaction.hash}`;
-  };
-
-  const switchToGoerliChain = () => {
-    if (library && library.provider) {
-      return library.provider.request({
-        method: "wallet_switchEthereumChain",
-        params: [{ chainId: `0x${GOERLI_CHAIN_ID}` }],
-      });
-    }
-    return Promise.reject();
   };
 
   const transactionSuccessElem = (

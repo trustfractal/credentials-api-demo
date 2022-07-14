@@ -114,9 +114,10 @@ export default function Hero() {
                 </Text>
               </SubtitleContainer>
               <SubtitleContainer>
-                <Text weight={TextWeights.BOLD}>
-                  {active ? <StatusMessage status={statusMessage} /> : "Connect your wallet to get started!"}
-                </Text>
+                {active ?
+                  <StatusMessage status={statusMessage} /> :
+                  <Text weight={TextWeights.BOLD}>Connect your wallet to get started!</Text>
+                }
               </SubtitleContainer>
             </HeroTitleColumn>
             <Connect />
