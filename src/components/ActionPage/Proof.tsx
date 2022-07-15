@@ -7,7 +7,7 @@ import useWeb3 from "../../hooks/web3";
 import { Button, Card } from "../ui";
 import Step from "./Step";
 
-const MESSAGE = `I authorize Defistarter (dc3aa1910acbb7ff4d22c07e43a6926adc3a81305a9355a304410048c9a91afd) to get a proof from Fractal that:
+const MESSAGE = `I authorize Defistarter (a14fc943a00b0711611691da42c956939ff8a9885e38f4a64eb35523ee807873) to get a proof from Fractal that:
 - I passed KYC level plus
 - I am not a citizen of the following countries: Germany (DE)
 - I am not a resident of the following countries: Canada (CA), United States of America (US)`;
