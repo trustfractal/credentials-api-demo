@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import styled from "styled-components";
 import { StepStatus } from "../../lib/utils";
 
@@ -36,7 +36,7 @@ export const Step = ({ label, status, onSuccessElem }: { label: string, status: 
     return "NOT_STARTED";
   };
 
-  const displayStatus = getDerivedStatus();
+  const displayStatus = useMemo(getDerivedStatus, [data, error, loading]);
 
   return (
     <StepContainer active={displayStatus !== "NOT_STARTED"}>

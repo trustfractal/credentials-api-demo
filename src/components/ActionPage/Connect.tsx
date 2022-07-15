@@ -35,7 +35,7 @@ export const Connect = () => {
     };
 
     checkChain();
-  }, [active]);
+  }, [active, chainId]);
 
   const connect = async () => {
     try {
@@ -48,12 +48,11 @@ export const Connect = () => {
 
   const switchToGoerliChain = () => {
     if (library && library.provider) {
-      return library.provider.request({
+      void library.provider.request({
         method: "wallet_switchEthereumChain",
         params: [{ chainId: `0x${GOERLI_CHAIN_ID}` }],
       });
     }
-    return Promise.reject();
   };
 
   const shortAddress = account ? `${account.substring(0, 5)}...${account.substring(38)}` : "";

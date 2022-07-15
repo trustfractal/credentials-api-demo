@@ -32,8 +32,8 @@ const getMessage = (statusMessage: StatusMessageT): string | React.ReactNode => 
 const StatusMessageContainer = styled.div``;
 
 const KYCLink = styled.a`
-        color: var(--c-orange);
-        `;
+  color: var(--c-orange);
+`;
 
 const StatusMessageText = styled.div``;
 
