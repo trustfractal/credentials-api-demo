@@ -29,27 +29,23 @@ const getMessage = (statusMessage: StatusMessageT): string | React.ReactNode => 
   }
 };
 
-const StatusMessageContainer = styled.div``;
-
 const KYCLink = styled.a`
   color: var(--c-orange);
 `;
 
-const StatusMessageText = styled.div``;
-
 export const StatusMessage = ({ status }: { status: StatusMessageT }) => (
-  <StatusMessageContainer>
-    <StatusMessageText>
+  <div>
+    <div>
       <Text size={TextSizes.NORMAL}>
         {getMessage(status)}
       </Text>
-    </StatusMessageText>
+    </div>
     {(status.status === "NOT_APPROVED" || status.status === "TX_ERROR") &&
       <Text size={TextSizes.EXTRA_SMALL} weight={TextWeights.BOLD}>
         You can <KYCLink href={KYC_LINK} target="_blank" rel="noreferrer">verify yourself with Fractal</KYCLink>.
       </Text>
     }
-  </StatusMessageContainer>
+  </div>
 );
 
 export default StatusMessage;

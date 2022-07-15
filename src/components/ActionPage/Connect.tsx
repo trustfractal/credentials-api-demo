@@ -28,13 +28,9 @@ export const Connect = () => {
   const { activate, active, account, chainId, deactivate, library } = useWeb3();
 
   useEffect(() => {
-    const checkChain = () => {
-      if (active && chainId !== GOERLI_CHAIN_ID) {
-        void switchToGoerliChain();
-      }
-    };
-
-    checkChain();
+    if (active && chainId !== GOERLI_CHAIN_ID) {
+      void switchToGoerliChain();
+    }
   }, [active, chainId]);
 
   const connect = async () => {
