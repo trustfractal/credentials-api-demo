@@ -25,11 +25,14 @@ const InfoTextContainer = styled.div`
   margin-bottom: 12px;
 `;
 
-export const SingleText = ({ children }: {children: string}) =>
-  <><Text>{children}</Text><Text>&nbsp;</Text></>;
+export const SingleText = ({ children }: { children: string }) => (
+  <>
+    <Text>{children}</Text>
+    <Text>&nbsp;</Text>
+  </>
+);
 
-export const MiniBackoffice = (
-) => {
+export const MiniBackoffice = () => {
   const { account, chainId, library } = useWeb3();
   const backoffice = useMiniBackoffice(account, chainId, library);
 
@@ -39,28 +42,38 @@ export const MiniBackoffice = (
       content = <SingleText>Please connect your wallet first.</SingleText>;
       break;
     case "UnregisteredUser":
-      content = <>
-        <Text>❓ Unregistered user</Text>
-        <Button onClick={backoffice.registerUser}>Register</Button>
-      </>;
+      content = (
+        <>
+          <Text>❓ Unregistered user</Text>
+          <Button onClick={backoffice.registerUser}>Register</Button>
+        </>
+      );
       break;
     case "KYCAbsent":
-      content = <>
-        <Text>🚫 KYC absent</Text>
-        <Button onClick={backoffice.approveUser}>Approve</Button>
-      </>;
+      content = (
+        <>
+          <Text>🚫 KYC absent</Text>
+          <Button onClick={backoffice.approveUser}>Approve</Button>
+        </>
+      );
       break;
     case "KYCApproved":
-      content = <>
-        <Text>✅ KYC Approved</Text>
-        <Button onClick={backoffice.disapproveUser}>Disapprove</Button>
-      </>;
+      content = (
+        <>
+          <Text>✅ KYC Approved</Text>
+          <Button onClick={backoffice.disapproveUser}>Disapprove</Button>
+        </>
+      );
       break;
     case "Loading":
       content = <SingleText>Working...</SingleText>;
       break;
     case "Error":
-      content = <SingleText>Something went wrong! See the console got more information.</SingleText>;
+      content = (
+        <SingleText>
+          Something went wrong! See the console got more information.
+        </SingleText>
+      );
       break;
     default:
       unreachable(backoffice);
@@ -69,7 +82,9 @@ export const MiniBackoffice = (
   return (
     <Card title="Mini Backoffice" width="40%">
       <CardBodyContainer>
-        <InfoTextContainer>Simulate Fractal server&apos;s verification activity.</InfoTextContainer>
+        <InfoTextContainer>
+          Simulate Fractal server&apos;s verification activity.
+        </InfoTextContainer>
         {content}
       </CardBodyContainer>
     </Card>

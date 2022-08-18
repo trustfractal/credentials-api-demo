@@ -42,18 +42,21 @@ type Backoffice =
 import fractalRegistryABI from "../assets/fractalRegistryABI.json";
 import selfServeRegistryOperatorABI from "../assets/selfServeRegistryOperatorABI.json";
 import { keccak256 } from "ethers/lib/utils";
-import { FractalRegistry, SelfServeRegistryOperator } from "../../typechain-types";
+import {
+  FractalRegistry,
+  SelfServeRegistryOperator,
+} from "../../typechain-types";
 const KYCList = "plus";
 const ZERO_USER =
   "0x0000000000000000000000000000000000000000000000000000000000000000";
 
 const fractalRegistry = new Contract(
   "0x4D9DE1bb481B9dA37A7a7E3a07F6f60654fEe7BB",
-  fractalRegistryABI,
+  fractalRegistryABI
 ) as FractalRegistry;
 const selfServeRegistryOperator = new Contract(
   "0x75ADb60A0bD28EE81133872401A76A55E215ED47",
-  selfServeRegistryOperatorABI,
+  selfServeRegistryOperatorABI
 ) as SelfServeRegistryOperator;
 
 type Loadable<T> = T | "loading" | "error" | "go_fetch";
@@ -63,19 +66,19 @@ const present = <T>(value: Loadable<T>): boolean =>
 
 const fetchFractalId = (
   signer: providers.JsonRpcSigner,
-  account: string,
+  account: string
 ): Promise<string> => fractalRegistry.connect(signer).getFractalId(account);
 
 const fetchKycStatus = (
   signer: providers.JsonRpcSigner,
-  fractalId: string,
+  fractalId: string
 ): Promise<boolean> =>
   fractalRegistry.connect(signer).isUserInList(fractalId, KYCList);
 
 const ensure_loaded = <T>(
   value: Loadable<T>,
   reporter: (v: Loadable<T>) => unknown,
-  fetcher: () => Promise<T>,
+  fetcher: () => Promise<T>
 ): value is T => {
   if (present(value)) return true;
 
@@ -94,29 +97,29 @@ const ensure_loaded = <T>(
 const reportTransactionTo =
   <T>(
     reporter: (v: Loadable<T>) => unknown,
-    promiser: () => Promise<ContractTransaction>,
+    promiser: () => Promise<ContractTransaction>
   ) =>
-    async (): Promise<void> => {
-      let tx: ContractTransaction;
-      try {
-        tx = await promiser();
-      } catch (e) {
-        // Typically, the user rejected the transaction.
-        console.error(e);
-        return;
-      }
+  async (): Promise<void> => {
+    let tx: ContractTransaction;
+    try {
+      tx = await promiser();
+    } catch (e) {
+      // Typically, the user rejected the transaction.
+      console.error(e);
+      return;
+    }
 
-      reporter("loading");
+    reporter("loading");
 
-      await tx.wait();
+    await tx.wait();
 
-      reporter("go_fetch");
-    };
+    reporter("go_fetch");
+  };
 
 export const useMiniBackoffice = (
   account: string | null | undefined,
   chainId: number | undefined,
-  library: providers.Web3Provider | undefined,
+  library: providers.Web3Provider | undefined
 ): Backoffice => {
   const [fractalId, setFractalId] = useState<Loadable<string>>("go_fetch");
   const [kycStatus, setKycStatus] = useState<Loadable<boolean>>("go_fetch");
@@ -130,7 +133,11 @@ export const useMiniBackoffice = (
     return { status: "Error" };
   }
 
-  if (!ensure_loaded(fractalId, setFractalId, () => fetchFractalId(signer, account))) {
+  if (
+    !ensure_loaded(fractalId, setFractalId, () =>
+      fetchFractalId(signer, account)
+    )
+  ) {
     return { status: "Loading" };
   }
 
@@ -138,12 +145,16 @@ export const useMiniBackoffice = (
     return {
       status: "UnregisteredUser",
       registerUser: reportTransactionTo(setFractalId, () =>
-        selfServeRegistryOperator.connect(signer).addSelf(keccak256(account)),
+        selfServeRegistryOperator.connect(signer).addSelf(keccak256(account))
       ),
     };
   }
 
-  if (!ensure_loaded(kycStatus, setKycStatus, () => fetchKycStatus(signer, fractalId))) {
+  if (
+    !ensure_loaded(kycStatus, setKycStatus, () =>
+      fetchKycStatus(signer, fractalId)
+    )
+  ) {
     return { status: "Loading" };
   }
 
@@ -152,7 +163,7 @@ export const useMiniBackoffice = (
       status: "KYCApproved",
       fractalId,
       disapproveUser: reportTransactionTo(setKycStatus, () =>
-        selfServeRegistryOperator.connect(signer).removeSelfFromList(KYCList),
+        selfServeRegistryOperator.connect(signer).removeSelfFromList(KYCList)
       ),
     };
   }
@@ -161,7 +172,7 @@ export const useMiniBackoffice = (
     status: "KYCAbsent",
     fractalId,
     approveUser: reportTransactionTo(setKycStatus, () =>
-      selfServeRegistryOperator.connect(signer).addSelfToList(KYCList),
+      selfServeRegistryOperator.connect(signer).addSelfToList(KYCList)
     ),
   };
 };

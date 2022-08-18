@@ -10,7 +10,7 @@ import { unreachable } from "../../lib/types";
 
 const fractalRegistry = new Contract(
   "0x4D9DE1bb481B9dA37A7a7E3a07F6f60654fEe7BB",
-  fractalRegistryABI,
+  fractalRegistryABI
 ) as FractalRegistry;
 
 const CardBodyContainer = styled.div`
@@ -59,9 +59,7 @@ export const Transact = () => {
 
   return (
     <Card title="Purchase eligibility" width="40%">
-      <CardBodyContainer>
-        {content}
-      </CardBodyContainer>
+      <CardBodyContainer>{content}</CardBodyContainer>
     </Card>
   );
 };
