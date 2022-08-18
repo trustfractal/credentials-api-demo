@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import useWeb3 from "../../hooks/web3";
 import { Button, Card as OriginalCard, Text } from "../ui";
-import { TextSizes } from "../ui/Text";
+import { TextSizes as _TextSizes } from "../ui/Text";
 import OriginalStep from "./Step";
 import useMiniBackoffice from "../../hooks/miniBackoffice";
 import { unreachable } from "../../lib/types";
@@ -13,7 +13,7 @@ const Card = styled(OriginalCard)`
   background-color: black;
 `;
 
-const Step = styled(OriginalStep)`
+const _Step = styled(OriginalStep)`
   opacity: 1;
 `;
 
@@ -29,20 +29,18 @@ const InfoTextContainer = styled.div`
   align-self: center;
 `;
 
-const StepListContainer = styled.ol`
+const _StepListContainer = styled.ol`
   list-style: decimal;
   list-style-position: inside;
   margin-top: 12px;
   padding: 0px 12px;
 `;
 
-
 export const MiniBackoffice = (
 ) => {
   const { account, chainId, library } = useWeb3();
   const backoffice = useMiniBackoffice(account, chainId, library);
 
-  console.log(backoffice.status)
   let content;
   switch (backoffice.status) {
     case "Unconfigured":
@@ -79,7 +77,7 @@ export const MiniBackoffice = (
   return (
     <Card title="Mini Backoffice" width="40%">
       <CardBodyContainer>
-        <InfoTextContainer>Simulate Fractal server's verification activity.</InfoTextContainer>
+        <InfoTextContainer>Simulate Fractal server&apos;s verification activity.</InfoTextContainer>
         {content}
         {/* <Text size={TextSizes.EXTRA_SMALL}><strong>In registry:</strong> {account ? shortAddress : "Not connected"}</Text>
         <Text size={TextSizes.EXTRA_SMALL}><strong>KYC passed:</strong> {account ? shortAddress : "Not connected"}</Text>
