@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Contract } from "ethers";
 import styled from "styled-components";
 
-import fractalRegistryABI from "../../assets/fractalRegistryABI.json";
+import demoABI from "../../assets/demoABI.json";
 import { CredentialResponse } from "../../lib/api";
 import { defaultStepStatus, StatusMessage } from "../../lib/utils";
 import { CONTRACT_ADDRESS } from "../../lib/config";
@@ -77,7 +77,7 @@ export const Transact = ({
     setTxStatus((status) => ({ ...status, loading: true }));
     const contract = new Contract(
       CONTRACT_ADDRESS,
-      fractalRegistryABI,
+      demoABI,
       library?.getSigner()
     );
 

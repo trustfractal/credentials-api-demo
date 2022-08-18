@@ -8,6 +8,7 @@ import useWeb3 from "../../hooks/web3";
 import Connect from "./Connect";
 import StatusMessage from "./StatusMessage";
 import Proof from "./Proof";
+import MiniBackoffice from "./MiniBackoffice";
 import Transact from "./Transact";
 
 import { CredentialResponse } from "../../lib/api";
@@ -30,7 +31,7 @@ const HeroContainer = styled.div`
   justify-content: space-around;
 
   @media(min-width: 768px) {
-    display: block; 
+    display: block;
     margin-bottom: 100px;
   }
 `;
@@ -131,10 +132,7 @@ export default function Hero() {
             <Connect />
           </HeroRow>
           <HeroRow>
-            <Proof
-              setCredentialResponse={setCredentialResponse}
-              setStatusMessage={setStatusMessage}
-            />
+            <MiniBackoffice setCredentialResponse={setCredentialResponse} />
             <Transact
               credentialResponse={credentialResponse}
               setStatusMessage={setStatusMessage}
