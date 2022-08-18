@@ -25,8 +25,8 @@ const InfoTextContainer = styled.div`
   margin-bottom: 12px;
 `;
 
-export const SingleText = ({children}: {children: string}) =>
-<><Text>{children}</Text><Text>&nbsp;</Text></>
+export const SingleText = ({ children }: {children: string}) =>
+  <><Text>{children}</Text><Text>&nbsp;</Text></>;
 
 export const MiniBackoffice = (
 ) => {

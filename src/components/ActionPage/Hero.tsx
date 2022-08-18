@@ -7,7 +7,6 @@ import { TextWeights } from "../ui/Text";
 import useWeb3 from "../../hooks/web3";
 import Connect from "./Connect";
 import StatusMessage from "./StatusMessage";
-import Proof from "./Proof";
 import MiniBackoffice from "./MiniBackoffice";
 import Transact from "./Transact";
 

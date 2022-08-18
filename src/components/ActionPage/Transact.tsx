@@ -2,19 +2,16 @@ import React, { useState, useEffect } from "react";
 import { Contract } from "ethers";
 import styled from "styled-components";
 
-import demoABI from "../../assets/demoABI.json";
-import { CredentialResponse } from "../../lib/api";
-import { defaultStepStatus, StatusMessage } from "../../lib/utils";
-import { CONTRACT_ADDRESS } from "../../lib/config";
-import {
-  DEFAULT_PROOF,
-  DEFAULT_APPROVED_AT,
-  DEFAULT_VALID_UNTIL,
-  DEFAULT_FRACTAL_ID,
-} from "../../lib/constants";
-import { Card, Button } from "../ui";
+import fractalRegistryABI from "../../assets/fractalRegistryABI.json";
+import { FractalRegistry } from "../../../typechain-types";
+import { Card } from "../ui";
 import useWeb3 from "../../hooks/web3";
-import Step from "./Step";
+import { unreachable } from "../../lib/types";
+
+const fractalRegistry = new Contract(
+  "0x4D9DE1bb481B9dA37A7a7E3a07F6f60654fEe7BB",
+  fractalRegistryABI,
+) as FractalRegistry;
 
 const CardBodyContainer = styled.div`
   display: flex;
@@ -23,115 +20,47 @@ const CardBodyContainer = styled.div`
   height: 100%;
 `;
 
-const InfoTextContainer = styled.div`
-  align-self: center;
-  opacity: 0.7;
-`;
+const ONE_SECOND = 1000;
 
-const StepListContainer = styled.ol`
-  list-style: decimal;
-  list-style-position: inside;
-  margin-top: 12px;
-  padding: 0px 12px;
-`;
-
-const TransactionSuccessContainer = styled.a`
-  margin-left: 10px;
-`;
-
-export const Transact = ({
-  credentialResponse,
-  setStatusMessage,
-}: {
-  credentialResponse: CredentialResponse | undefined;
-  setStatusMessage: (s: StatusMessage) => void;
-}) => {
-  const { active, library } = useWeb3();
-
-  const [txStatus, setTxStatus] = useState(defaultStepStatus);
-  const [credentialStatus, setCredentialstatus] = useState(defaultStepStatus);
+export const Transact = () => {
+  const { account, library } = useWeb3();
+  const [userInList, setUserInList] = useState<boolean | undefined>(undefined);
 
   useEffect(() => {
-    if (credentialResponse?.proof) {
-      setCredentialstatus((status) => ({
-        ...status,
-        error: false,
-        data: credentialResponse,
-      }));
-    } else {
-      setCredentialstatus((status) => ({ ...status, error: true }));
+    if (!account || !library) {
+      setUserInList(undefined);
+      return () => undefined;
     }
-  }, [credentialResponse]);
 
-  let proof = DEFAULT_PROOF,
-    validUntil = DEFAULT_VALID_UNTIL,
-    approvedAt = DEFAULT_APPROVED_AT,
-    fractalId = DEFAULT_FRACTAL_ID;
-  if (credentialResponse?.proof) {
-    ({ proof, validUntil, approvedAt, fractalId } = credentialResponse);
+    const connectRegistry = fractalRegistry.connect(library.getSigner());
+
+    // The result is not used, I just want to use the await syntax.
+    // eslint-disable-next-line @typescript-eslint/no-misused-promises
+    const interval = setInterval(async () => {
+      const fractalId = await connectRegistry.getFractalId(account);
+      setUserInList(await connectRegistry.isUserInList(fractalId, "plus"));
+    }, ONE_SECOND);
+
+    return () => clearInterval(interval);
+  }, [account]);
+
+  let content;
+  if (!account) {
+    content = <>Connect your wallet. 👛</>;
+  } else if (userInList === undefined) {
+    content = <>Checking chain state... ⏱</>;
+  } else if (userInList === false) {
+    content = <>Not able to make purchase. ❌</>;
+  } else if (userInList === true) {
+    content = <>Cleared for purchase! ✅</>;
+  } else {
+    unreachable(userInList);
   }
 
-  const { tx: transaction } = txStatus.data;
-
-  const transact = async () => {
-    setTxStatus((status) => ({ ...status, loading: true }));
-    const contract = new Contract(
-      CONTRACT_ADDRESS,
-      demoABI,
-      library?.getSigner()
-    );
-
-    try {
-      const tx = await contract.main(proof, validUntil, approvedAt, fractalId);
-      setTxStatus((status) => ({
-        ...status,
-        loading: false,
-        error: undefined,
-        data: { tx },
-      }));
-      setStatusMessage({ status: "TX_SUCCESS" });
-    } catch (err) {
-      setTxStatus((status) => ({ ...status, loading: false, error: err }));
-      setStatusMessage({ status: "TX_ERROR" });
-    }
-  };
-
-  const getTransactionURL = () => {
-    if (!transaction) return "";
-    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-    return `https://goerli.etherscan.io/tx/${transaction.hash}`;
-  };
-
-  const transactionSuccessElem = (
-    <TransactionSuccessContainer
-      href={getTransactionURL()}
-      target="_blank"
-      rel="noreferrer"
-    >
-      See on Etherscan
-    </TransactionSuccessContainer>
-  );
-
   return (
-    <Card title="Buy token" width="40%">
+    <Card title="Purchase eligibility" width="40%">
       <CardBodyContainer>
-        <InfoTextContainer>
-          Make a transaction using your Fractal proof
-        </InfoTextContainer>
-        <StepListContainer>
-          <Step
-            label="Use Fractal credential proof"
-            status={credentialStatus}
-          />
-          <Step
-            label="Make transaction"
-            status={txStatus}
-            onSuccessElem={transactionSuccessElem}
-          />
-        </StepListContainer>
-        <Button disabled={!active} onClick={transact}>
-          Make transaction
-        </Button>
+        {content}
       </CardBodyContainer>
     </Card>
   );
