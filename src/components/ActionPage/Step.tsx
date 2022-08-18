@@ -6,7 +6,7 @@ type DISPLAY_STATUS = "NOT_STARTED" | "LOADING" | "ERROR" | "SUCCESS";
 
 const StepContainer = styled.li`
   margin-bottom: 12px;
-  opacity: ${({ active }: { active: boolean }) => active ? "1" : "0.5"};
+  opacity: ${({ active }: { active: boolean }) => (active ? "1" : "0.5")};
 `;
 
 const getSuffixIcon = (status: DISPLAY_STATUS) => {
@@ -22,7 +22,15 @@ const getSuffixIcon = (status: DISPLAY_STATUS) => {
   }
 };
 
-export const Step = ({ label, status, onSuccessElem }: { label: string, status: StepStatus, onSuccessElem?: React.ReactNode }) => {
+export const Step = ({
+  label,
+  status,
+  onSuccessElem,
+}: {
+  label: string;
+  status: StepStatus;
+  onSuccessElem?: React.ReactNode;
+}) => {
   const { loading, error, data } = status;
 
   const getDerivedStatus = (): DISPLAY_STATUS => {

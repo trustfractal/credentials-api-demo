@@ -9,7 +9,7 @@ const SocialsSection = styled.section``;
 const SocialsContainer = styled.div`
   margin-bottom: 20px;
 
-  @media(min-width: 768px) {
+  @media (min-width: 768px) {
     margin-bottom: 50px;
   }
 `;
@@ -17,7 +17,7 @@ const SocialsContainer = styled.div`
 const TitleContainer = styled.div`
   margin-bottom: 30px;
 
-  @media(min-width: 768px) {
+  @media (min-width: 768px) {
     text-align: center;
   }
 `;
@@ -25,7 +25,7 @@ const TitleContainer = styled.div`
 const TextContainer = styled.div`
   margin-bottom: 24px;
 
-  @media(min-width: 768px) {
+  @media (min-width: 768px) {
     margin-bottom: 50px;
     text-align: center;
   }
@@ -37,15 +37,15 @@ const ButtonsContainer = styled.div`
   justify-content: space-evenly;
   align-items: center;
 
-  @media(min-width: 768px) {
+  @media (min-width: 768px) {
     flex-direction: row;
   }
 `;
 
 const ButtonContainer = styled.div`
   margin-bottom: 12px;
-  
-  @media(min-width: 768px) {
+
+  @media (min-width: 768px) {
     margin-bottom: 0;
     button {
       height: 60px;

@@ -15,8 +15,8 @@ const FooterContainer = styled.div`
   grid-template-rows: auto;
   grid-column-gap: 18px;
   grid-row-gap: 18px;
-  
-  @media(min-width: 768px) {
+
+  @media (min-width: 768px) {
     margin: 0 107px;
     grid-template-columns: repeat(3, 1fr);
   }
@@ -39,7 +39,7 @@ const FooterLinksContainer = styled.div``;
 const FooterAboutContainer = styled.div`
   grid-column: 1 / span 2;
 
-  @media(min-width: 768px) {
+  @media (min-width: 768px) {
     grid-column: 3;
   }
 `;

@@ -32,8 +32,13 @@ const StepListContainer = styled.ol`
   padding: 0px 12px;
 `;
 
-export const Proof = ({ setCredentialResponse, setStatusMessage }:
-  { setCredentialResponse: (c: CredentialResponse) => void, setStatusMessage: (s: StatusMessage) => void }) => {
+export const Proof = ({
+  setCredentialResponse,
+  setStatusMessage,
+}: {
+  setCredentialResponse: (c: CredentialResponse) => void;
+  setStatusMessage: (s: StatusMessage) => void;
+}) => {
   const { account, active, library } = useWeb3();
 
   const [signatureStatus, setSignatureStatus] = useState(defaultStepStatus);
@@ -52,9 +57,18 @@ export const Proof = ({ setCredentialResponse, setStatusMessage }:
       setSignatureStatus((status) => ({ ...status, loading: true }));
       try {
         const signature = await library.getSigner(account).signMessage(MESSAGE);
-        setSignatureStatus((status) => ({ ...status, loading: false, error: undefined, data: { signature } }));
+        setSignatureStatus((status) => ({
+          ...status,
+          loading: false,
+          error: undefined,
+          data: { signature },
+        }));
       } catch (error) {
-        setSignatureStatus((status) => ({ ...status, loading: false, error: error }));
+        setSignatureStatus((status) => ({
+          ...status,
+          loading: false,
+          error: error,
+        }));
       }
     }
   };
@@ -66,9 +80,14 @@ export const Proof = ({ setCredentialResponse, setStatusMessage }:
     setApiCallStatus((status) => ({ ...status, loading: true }));
     try {
       const res = await fetchCredential(MESSAGE, signature as string);
-      const body = await res.json() as CredentialResponse;
+      const body = (await res.json()) as CredentialResponse;
       setCredentialResponse(body);
-      setApiCallStatus((status) => ({ ...status, loading: false, error: res.status !== 200, data: { body, status: res.status } }));
+      setApiCallStatus((status) => ({
+        ...status,
+        loading: false,
+        error: res.status !== 200,
+        data: { body, status: res.status },
+      }));
       updateStatusMessage(res.status);
     } catch (err) {
       setApiCallStatus((status) => ({ ...status, loading: false, error: err }));
@@ -76,7 +95,10 @@ export const Proof = ({ setCredentialResponse, setStatusMessage }:
   };
 
   const updateStatusMessage = (status) => {
-    setStatusMessage({ status: status === 200 ? "APPROVED" : "NOT_APPROVED", data: { address: account } });
+    setStatusMessage({
+      status: status === 200 ? "APPROVED" : "NOT_APPROVED",
+      data: { address: account },
+    });
   };
 
   return (
@@ -84,10 +106,15 @@ export const Proof = ({ setCredentialResponse, setStatusMessage }:
       <CardBodyContainer>
         <InfoTextContainer>Get a proof that you are KYCed.</InfoTextContainer>
         <StepListContainer>
-          <Step label="Sign data sharing authorization message" status={signatureStatus} />
+          <Step
+            label="Sign data sharing authorization message"
+            status={signatureStatus}
+          />
           <Step label="Fetch credential proof" status={apiCallStatus} />
         </StepListContainer>
-        <Button disabled={!active} onClick={signMessage}>Get Fractal proof</Button>
+        <Button disabled={!active} onClick={signMessage}>
+          Get Fractal proof
+        </Button>
       </CardBodyContainer>
     </Card>
   );

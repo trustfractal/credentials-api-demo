@@ -19,10 +19,10 @@ const LogoContainer = styled.div`
 
 const LinksContainer = styled.div`
   display: none;
-  
-  @media(min-width: 768px) {
+
+  @media (min-width: 768px) {
     flex: 1;
-  
+
     display: flex;
     align-items: center;
     justify-content: space-between;

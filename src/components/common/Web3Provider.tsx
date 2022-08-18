@@ -7,9 +7,7 @@ import { providers } from "ethers";
 const getLibrary = (provider: any) => new providers.Web3Provider(provider);
 
 export const Web3Provider = ({ children }: { children: React.ReactNode }) => (
-  <Web3ReactProvider getLibrary={getLibrary}>
-    {children}
-  </Web3ReactProvider>
+  <Web3ReactProvider getLibrary={getLibrary}>{children}</Web3ReactProvider>
 );
 
 export default Web3Provider;

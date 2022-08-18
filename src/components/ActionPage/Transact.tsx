@@ -6,7 +6,12 @@ import contractABI from "../../assets/abi.json";
 import { CredentialResponse } from "../../lib/api";
 import { defaultStepStatus, StatusMessage } from "../../lib/utils";
 import { CONTRACT_ADDRESS } from "../../lib/config";
-import { DEFAULT_PROOF, DEFAULT_APPROVED_AT, DEFAULT_VALID_UNTIL, DEFAULT_FRACTAL_ID } from "../../lib/constants";
+import {
+  DEFAULT_PROOF,
+  DEFAULT_APPROVED_AT,
+  DEFAULT_VALID_UNTIL,
+  DEFAULT_FRACTAL_ID,
+} from "../../lib/constants";
 import { Card, Button } from "../ui";
 import useWeb3 from "../../hooks/web3";
 import Step from "./Step";
@@ -34,8 +39,13 @@ const TransactionSuccessContainer = styled.a`
   margin-left: 10px;
 `;
 
-export const Transact = ({ credentialResponse, setStatusMessage }:
-  { credentialResponse: CredentialResponse | undefined, setStatusMessage: (s: StatusMessage) => void }) => {
+export const Transact = ({
+  credentialResponse,
+  setStatusMessage,
+}: {
+  credentialResponse: CredentialResponse | undefined;
+  setStatusMessage: (s: StatusMessage) => void;
+}) => {
   const { active, library } = useWeb3();
 
   const [txStatus, setTxStatus] = useState(defaultStepStatus);
@@ -43,13 +53,20 @@ export const Transact = ({ credentialResponse, setStatusMessage }:
 
   useEffect(() => {
     if (credentialResponse?.proof) {
-      setCredentialstatus((status) => ({ ...status, error: false, data: credentialResponse }));
+      setCredentialstatus((status) => ({
+        ...status,
+        error: false,
+        data: credentialResponse,
+      }));
     } else {
       setCredentialstatus((status) => ({ ...status, error: true }));
     }
   }, [credentialResponse]);
 
-  let proof = DEFAULT_PROOF, validUntil = DEFAULT_VALID_UNTIL, approvedAt = DEFAULT_APPROVED_AT, fractalId = DEFAULT_FRACTAL_ID;
+  let proof = DEFAULT_PROOF,
+    validUntil = DEFAULT_VALID_UNTIL,
+    approvedAt = DEFAULT_APPROVED_AT,
+    fractalId = DEFAULT_FRACTAL_ID;
   if (credentialResponse?.proof) {
     ({ proof, validUntil, approvedAt, fractalId } = credentialResponse);
   }
@@ -58,11 +75,20 @@ export const Transact = ({ credentialResponse, setStatusMessage }:
 
   const transact = async () => {
     setTxStatus((status) => ({ ...status, loading: true }));
-    const contract = new Contract(CONTRACT_ADDRESS, contractABI, library?.getSigner());
+    const contract = new Contract(
+      CONTRACT_ADDRESS,
+      contractABI,
+      library?.getSigner()
+    );
 
     try {
       const tx = await contract.main(proof, validUntil, approvedAt, fractalId);
-      setTxStatus((status) => ({ ...status, loading: false, error: undefined, data: { tx } }));
+      setTxStatus((status) => ({
+        ...status,
+        loading: false,
+        error: undefined,
+        data: { tx },
+      }));
       setStatusMessage({ status: "TX_SUCCESS" });
     } catch (err) {
       setTxStatus((status) => ({ ...status, loading: false, error: err }));
@@ -77,7 +103,11 @@ export const Transact = ({ credentialResponse, setStatusMessage }:
   };
 
   const transactionSuccessElem = (
-    <TransactionSuccessContainer href={getTransactionURL()} target="_blank" rel="noreferrer">
+    <TransactionSuccessContainer
+      href={getTransactionURL()}
+      target="_blank"
+      rel="noreferrer"
+    >
       See on Etherscan
     </TransactionSuccessContainer>
   );
@@ -85,12 +115,23 @@ export const Transact = ({ credentialResponse, setStatusMessage }:
   return (
     <Card title="Buy token" width="40%">
       <CardBodyContainer>
-        <InfoTextContainer>Make a transaction using your Fractal proof</InfoTextContainer>
+        <InfoTextContainer>
+          Make a transaction using your Fractal proof
+        </InfoTextContainer>
         <StepListContainer>
-          <Step label="Use Fractal credential proof" status={credentialStatus} />
-          <Step label="Make transaction" status={txStatus} onSuccessElem={transactionSuccessElem} />
+          <Step
+            label="Use Fractal credential proof"
+            status={credentialStatus}
+          />
+          <Step
+            label="Make transaction"
+            status={txStatus}
+            onSuccessElem={transactionSuccessElem}
+          />
         </StepListContainer>
-        <Button disabled={!active} onClick={transact}>Make transaction</Button>
+        <Button disabled={!active} onClick={transact}>
+          Make transaction
+        </Button>
       </CardBodyContainer>
     </Card>
   );

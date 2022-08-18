@@ -9,7 +9,7 @@ const AboutSection = styled.section``;
 const AboutContainer = styled.div`
   margin-bottom: 20px;
 
-  @media(min-width: 768px) {
+  @media (min-width: 768px) {
     margin-bottom: 50px;
   }
 `;
@@ -21,14 +21,14 @@ const TitleContainer = styled.div`
 const TextContainer = styled.div`
   margin-bottom: 24px;
 
-  @media(min-width: 768px) {
+  @media (min-width: 768px) {
     margin-bottom: 50px;
   }
 `;
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
-  @media(min-width: 768px) {
+  @media (min-width: 768px) {
     justify-content: flex-start;
   }
 `;
@@ -43,9 +43,11 @@ export default function About() {
           </TitleContainer>
           <TextContainer>
             <Text size={TextSizes.MEDIUM}>
-              This page is the frontend to a dApp that requires KYC. Normally you wouldn’t even see the “Make transaction”
-              button until you’re KYC-approved, but we’re showing it already so you can test that it only succeeds if you’re
-              approved. It’s connected to a smart contract that needs to verify your approval before proceeding.
+              This page is the frontend to a dApp that requires KYC. Normally
+              you wouldn’t even see the “Make transaction” button until you’re
+              KYC-approved, but we’re showing it already so you can test that it
+              only succeeds if you’re approved. It’s connected to a smart
+              contract that needs to verify your approval before proceeding.
             </Text>
           </TextContainer>
           <ButtonContainer>

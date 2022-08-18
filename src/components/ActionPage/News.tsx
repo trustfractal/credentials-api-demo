@@ -9,7 +9,7 @@ const NewsSection = styled.section``;
 const NewsContainer = styled.div`
   margin-bottom: 20px;
 
-  @media(min-width: 768px) {
+  @media (min-width: 768px) {
     margin-bottom: 50px;
   }
 `;
@@ -17,7 +17,7 @@ const NewsContainer = styled.div`
 const TitleContainer = styled.div`
   margin-bottom: 30px;
 
-  @media(min-width: 768px) {
+  @media (min-width: 768px) {
     text-align: center;
   }
 `;
