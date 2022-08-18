@@ -13,8 +13,9 @@
     "build": "gatsby build",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
+    "format": "prettier --write .",
     "lint": "yarn run lint:js && yarn run lint:types",
-    "lint:js": "eslint src --ext \"js,ts,tsx\"",
+    "lint:js": "eslint src --ext \"js,ts,tsx\" && prettier --check .",
     "lint:types": "tsc --noEmit"
   },
   "dependencies": {
