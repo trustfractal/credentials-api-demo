@@ -4,17 +4,12 @@ import styled from "styled-components";
 import useWeb3 from "../../hooks/web3";
 import { Button, Card as OriginalCard, Text } from "../ui";
 import { TextSizes as _TextSizes } from "../ui/Text";
-import OriginalStep from "./Step";
 import useMiniBackoffice from "../../hooks/miniBackoffice";
 import { unreachable } from "../../lib/types";
 
 const Card = styled(OriginalCard)`
   color: white;
   background-color: black;
-`;
-
-const _Step = styled(OriginalStep)`
-  opacity: 1;
 `;
 
 const CardBodyContainer = styled.div`
@@ -27,14 +22,11 @@ const CardBodyContainer = styled.div`
 
 const InfoTextContainer = styled.div`
   align-self: center;
+  margin-bottom: 12px;
 `;
 
-const _StepListContainer = styled.ol`
-  list-style: decimal;
-  list-style-position: inside;
-  margin-top: 12px;
-  padding: 0px 12px;
-`;
+export const SingleText = ({children}: {children: string}) =>
+<><Text>{children}</Text><Text>&nbsp;</Text></>
 
 export const MiniBackoffice = (
 ) => {
@@ -44,31 +36,31 @@ export const MiniBackoffice = (
   let content;
   switch (backoffice.status) {
     case "Unconfigured":
-      content = <Text>Please connect your wallet first.</Text>;
+      content = <SingleText>Please connect your wallet first.</SingleText>;
       break;
     case "UnregisteredUser":
       content = <>
-        <Text>UnregisteredUser</Text>
+        <Text>❓ Unregistered user</Text>
         <Button onClick={backoffice.registerUser}>Register</Button>
       </>;
       break;
     case "KYCAbsent":
       content = <>
-        <Text>KYCAbsent</Text>
+        <Text>🚫 KYC absent</Text>
         <Button onClick={backoffice.approveUser}>Approve</Button>
       </>;
       break;
     case "KYCApproved":
       content = <>
-        <Text>KYCApproved</Text>
+        <Text>✅ KYC Approved</Text>
         <Button onClick={backoffice.disapproveUser}>Disapprove</Button>
       </>;
       break;
     case "Loading":
-      content = (<Text>Working...</Text>);
+      content = <SingleText>Working...</SingleText>;
       break;
     case "Error":
-      content = (<Text>Something went wrong! See the console got more information.</Text>);
+      content = <SingleText>Something went wrong! See the console got more information.</SingleText>;
       break;
     default:
       unreachable(backoffice);
@@ -79,14 +71,6 @@ export const MiniBackoffice = (
       <CardBodyContainer>
         <InfoTextContainer>Simulate Fractal server&apos;s verification activity.</InfoTextContainer>
         {content}
-        {/* <Text size={TextSizes.EXTRA_SMALL}><strong>In registry:</strong> {account ? shortAddress : "Not connected"}</Text>
-        <Text size={TextSizes.EXTRA_SMALL}><strong>KYC passed:</strong> {account ? shortAddress : "Not connected"}</Text>
-        {
-            active
-            ?<Button disabled={!active} onClick={signMessage}>Get active proof</Button>
-            :<Button disabled={!active} onClick={signMessage}>Get deact proof</Button>
-        } */}
-
       </CardBodyContainer>
     </Card>
   );
