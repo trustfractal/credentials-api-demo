@@ -16,8 +16,8 @@ const HeroContainer = styled.section`
     rgba(209, 151, 255, 0.13),
     rgba(209, 151, 255, 0.13)
   );
-  
-  @media(min-width: 768px) {
+
+  @media (min-width: 768px) {
     border-radius: 0% 100% 100% 0% / 100% 0% 100% 0%;
   }
 `;

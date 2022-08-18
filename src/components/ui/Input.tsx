@@ -20,7 +20,7 @@ const InputContainer = styled.input`
 
   color: var(--c-white);
 
-  @media(min-width: 768px) {
+  @media (min-width: 768px) {
     min-width: 500px;
     font-size: 24px;
     line-height: 24px;
@@ -35,7 +35,7 @@ const InputContainer = styled.input`
     font-size: 16px;
     line-height: 16px;
 
-    @media(min-width: 768px) {
+    @media (min-width: 768px) {
       font-size: 24px;
       line-height: 24px;
     }

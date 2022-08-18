@@ -51,21 +51,31 @@ export const Connect = () => {
     }
   };
 
-  const shortAddress = account ? `${account.substring(0, 5)}...${account.substring(38)}` : "";
+  const shortAddress = account
+    ? `${account.substring(0, 5)}...${account.substring(38)}`
+    : "";
 
   return (
     <ConnectContainer>
       <Card width="400px" height="200px" title="My wallet">
         <CardBodyContainer>
-          <Text size={TextSizes.EXTRA_SMALL}><strong>Account:</strong> {account ? shortAddress : "Not connected"}</Text>
-          <Text size={TextSizes.EXTRA_SMALL}><strong>Görli chain:</strong> {chainId === GOERLI_CHAIN_ID ? "🟢" : "🔴"}</Text>
+          <Text size={TextSizes.EXTRA_SMALL}>
+            <strong>Account:</strong> {account ? shortAddress : "Not connected"}
+          </Text>
+          <Text size={TextSizes.EXTRA_SMALL}>
+            <strong>Görli chain:</strong>{" "}
+            {chainId === GOERLI_CHAIN_ID ? "🟢" : "🔴"}
+          </Text>
           <InfoTextContiner>
-            <Text size={TextSizes.EXTRA_EXTRA_SMALL}>If you have an approved address, connect that one!</Text>
+            <Text size={TextSizes.EXTRA_EXTRA_SMALL}>
+              If you have an approved address, connect that one!
+            </Text>
           </InfoTextContiner>
-          {!active ?
-            <Button onClick={connect}>Connect wallet</Button> :
+          {!active ? (
+            <Button onClick={connect}>Connect wallet</Button>
+          ) : (
             <Button onClick={deactivate}>Disconnect wallet</Button>
-          }
+          )}
         </CardBodyContainer>
       </Card>
     </ConnectContainer>

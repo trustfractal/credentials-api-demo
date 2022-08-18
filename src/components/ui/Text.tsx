@@ -19,7 +19,7 @@ export const TextWeights = {
 
 const TextContainer = styled.p`
   ${(props) =>
-  css`
+    css`
       font-size: ${props.size};
       line-height: ${props.size};
       font-weight: ${props.weight};
@@ -39,7 +39,7 @@ export default function Text(props) {
 Text.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(
-      PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
+      PropTypes.oneOfType([PropTypes.element, PropTypes.string])
     ),
     PropTypes.element,
     PropTypes.string,

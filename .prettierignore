@@ -1,0 +1,6 @@
+# From https://www.gatsbyjs.com/plugins/gatsby-plugin-prettier-eslint/
+**/node_modules/**/*
+**/.git/**/*
+**/dist/**/*
+.cache/**/*
+public/**/*

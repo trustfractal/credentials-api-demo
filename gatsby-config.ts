@@ -11,34 +11,41 @@ const config: GatsbyConfig = {
   // If you use VSCode you can also use the GraphQL plugin
   // Learn more at: https://gatsby.dev/graphql-typegen
   graphqlTypegen: true,
-  plugins: ["gatsby-plugin-styled-components", "gatsby-plugin-image", "gatsby-plugin-react-helmet", "gatsby-plugin-sharp", "gatsby-transformer-sharp", {
-    resolve: 'gatsby-source-filesystem',
-    options: {
-      "name": "images",
-      "path": `${__dirname}/src/assets/images/`
+  plugins: [
+    "gatsby-plugin-image",
+    "gatsby-plugin-react-helmet",
+    "gatsby-plugin-sharp",
+    "gatsby-plugin-styled-components",
+    "gatsby-transformer-sharp",
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
+        name: "images",
+        path: `${__dirname}/src/assets/images/`,
+      },
+      __key: "images",
     },
-    __key: "images"
-  },
-  {
-    resolve: 'gatsby-plugin-react-svg',
-    options: {
-      rule: {
-        include: /assets/
-      }
-    }
-  },
-  {
-    resolve: `gatsby-plugin-manifest`,
-    options: {
-      name: `Credentials API demo`,
-      short_name: `creditentials-api`,
-      start_url: `/`,
-      background_color: `#FFFFFF`,
-      theme_color: `#FFFFFF`,
-      display: `minimal-ui`,
-      icon: `src/assets/images/logo.png`, // This path is relative to the root of the site.
+    {
+      resolve: "gatsby-plugin-react-svg",
+      options: {
+        rule: {
+          include: /assets/,
+        },
+      },
     },
-  }]
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `Credentials API demo`,
+        short_name: `creditentials-api`,
+        start_url: `/`,
+        background_color: `#FFFFFF`,
+        theme_color: `#FFFFFF`,
+        display: `minimal-ui`,
+        icon: `src/assets/images/logo.png`, // This path is relative to the root of the site.
+      },
+    },
+  ],
 };
 
 export default config;

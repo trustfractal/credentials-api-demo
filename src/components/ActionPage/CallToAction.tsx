@@ -19,7 +19,7 @@ const ActionsContainer = styled.div`
   flex-direction: column;
   align-items: center;
 
-  @media(min-width: 768px) {
+  @media (min-width: 768px) {
     flex-direction: row;
     justify-content: center;
   }
@@ -28,7 +28,7 @@ const ActionsContainer = styled.div`
 const ButtonContainer = styled.div`
   margin-top: 20px;
 
-  @media(min-width: 768px) {
+  @media (min-width: 768px) {
     margin-top: 0;
     margin-left: 67px;
   }

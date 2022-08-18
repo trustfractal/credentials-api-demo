@@ -6,66 +6,66 @@ import Text from "./Text";
 import Icon from "./Icon";
 
 const buttonStyles = css`
-user-select: none;
+  user-select: none;
 
-background-color: var(--c-orange);
-color: var(--c-white);
+  background-color: var(--c-orange);
+  color: var(--c-white);
 
-border-radius: 10px;
-padding-left: 15px;
-padding-right: 15px;
+  border-radius: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
 
-height: 40px;
-min-width: 170px;
+  height: 40px;
+  min-width: 170px;
 
-display: flex;
-align-items: center;
-justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-transition: all 0.5s;
-transform: scale(1);
+  transition: all 0.5s;
+  transform: scale(1);
 
-:hover {
+  :hover {
+    ${(props) =>
+      !props.disabled &&
+      !props.loading &&
+      css`
+        opacity: 0.8;
+      `}
+  }
+
   ${(props) =>
-  !props.disabled &&
-    !props.loading &&
+    props.alt === "true" &&
     css`
-      opacity: 0.8;
+      background-color: var(--c-light-pink);
+      box-shadow: 0px 3px 3px var(--c-pink);
+      border-radius: 5px;
+
+      padding-left: 10px;
+      padding-right: 16x;
+      justify-content: flex-start;
+
+      height: 30px;
     `}
-}
+
+  ${(props) =>
+    props.height !== undefined &&
+    css`
+      height: ${props.height};
+    `}
 
 ${(props) =>
-      props.alt === "true" &&
+    props.width !== undefined &&
     css`
-    background-color: var(--c-light-pink);
-    box-shadow: 0px 3px 3px var(--c-pink);
-    border-radius: 5px;
-
-    padding-left: 10px;
-    padding-right: 16x;
-    justify-content: flex-start;
-
-    height: 30px;
-  `}
+      width: ${props.width};
+    `}
 
 ${(props) =>
-      props.height !== undefined &&
+    props.disabled &&
     css`
-    height: ${props.height};
-  `}
-
-${(props) =>
-      props.width !== undefined &&
-    css`
-    width: ${props.width};
-  `}
-
-${(props) =>
-      props.disabled &&
-    css`
-    opacity: 0.4;
-    background-color: var(--c-red);
-  `}
+      opacity: 0.4;
+      background-color: var(--c-red);
+    `}
 `;
 
 const ButtonContainer = styled.button`

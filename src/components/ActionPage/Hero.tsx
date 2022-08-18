@@ -19,7 +19,7 @@ const HeroSection = styled.section`
   height: calc(100vh - 76px);
   display: flex;
 
-  @media(min-width: 768px) {
+  @media (min-width: 768px) {
     height: auto;
   }
 `;
@@ -50,7 +50,7 @@ const HeroRow = styled.div`
   width: 100%;
   flex-direction: column;
 
-  @media(min-width: 768px) {
+  @media (min-width: 768px) {
     text-align: left;
     flex-direction: row;
     justify-content: space-between;
@@ -62,7 +62,7 @@ const HeroTitleColumn = styled.div`
   display: flex;
   flex-direction: column;
 
-  @media(min-width: 768px) {
+  @media (min-width: 768px) {
     width: 50%;
   }
 `;
@@ -71,7 +71,7 @@ const TitleContainer = styled.div`
   margin-bottom: 29px;
   text-align: center;
 
-  @media(min-width: 768px) {
+  @media (min-width: 768px) {
     text-align: left;
   }
 `;
@@ -80,7 +80,7 @@ const SubtitleContainer = styled.div`
   margin-bottom: 29px;
   text-align: center;
 
-  @media(min-width: 768px) {
+  @media (min-width: 768px) {
     text-align: left;
   }
 
@@ -93,8 +93,12 @@ const SubtitleContainer = styled.div`
 
 export default function Hero() {
   const { active } = useWeb3();
-  const [credentialResponse, setCredentialResponse] = useState<CredentialResponse | undefined>(undefined);
-  const [statusMessage, setStatusMessage] = useState<StatusMessageT>({ status: "NO_MESSAGE" });
+  const [credentialResponse, setCredentialResponse] = useState<
+    CredentialResponse | undefined
+  >(undefined);
+  const [statusMessage, setStatusMessage] = useState<StatusMessageT>({
+    status: "NO_MESSAGE",
+  });
 
   return (
     <HeroSection>
@@ -110,21 +114,31 @@ export default function Hero() {
               </TitleContainer>
               <SubtitleContainer>
                 <Text>
-                  Existing Fractal users (we have 1M and counting) can be onboarded instantly
+                  Existing Fractal users (we have 1M and counting) can be
+                  onboarded instantly
                 </Text>
               </SubtitleContainer>
               <SubtitleContainer>
-                {active ?
-                  <StatusMessage status={statusMessage} /> :
-                  <Text weight={TextWeights.BOLD}>Connect your wallet to get started!</Text>
-                }
+                {active ? (
+                  <StatusMessage status={statusMessage} />
+                ) : (
+                  <Text weight={TextWeights.BOLD}>
+                    Connect your wallet to get started!
+                  </Text>
+                )}
               </SubtitleContainer>
             </HeroTitleColumn>
             <Connect />
           </HeroRow>
           <HeroRow>
-            <Proof setCredentialResponse={setCredentialResponse} setStatusMessage={setStatusMessage} />
-            <Transact credentialResponse={credentialResponse} setStatusMessage={setStatusMessage} />
+            <Proof
+              setCredentialResponse={setCredentialResponse}
+              setStatusMessage={setStatusMessage}
+            />
+            <Transact
+              credentialResponse={credentialResponse}
+              setStatusMessage={setStatusMessage}
+            />
           </HeroRow>
         </HeroContainer>
       </TopComponent>

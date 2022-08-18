@@ -6,34 +6,34 @@ import { Text } from "../ui";
 import { TextSizes, TextWeights } from "./Text";
 
 const cardStyles = css`
-background-color: var(--c-white);
+  background-color: var(--c-white);
 
-border-radius: 10px;
-padding: 10px;
+  border-radius: 10px;
+  padding: 10px;
 
-min-height: 100px;
-min-width: 170px;
+  min-height: 100px;
+  min-width: 170px;
 
-display: flex;
-flex-direction: column;
-align-items: stretch;
-justify-content: flex-start;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
 
--webkit-box-shadow: 3px 3px 14px 0px rgba(231,205,252,1);
--moz-box-shadow: 3px 3px 14px 0px rgba(231,205,252,1);
-box-shadow: 3px 3px 14px 0px rgba(231,205,252,1);
+  -webkit-box-shadow: 3px 3px 14px 0px rgba(231, 205, 252, 1);
+  -moz-box-shadow: 3px 3px 14px 0px rgba(231, 205, 252, 1);
+  box-shadow: 3px 3px 14px 0px rgba(231, 205, 252, 1);
 
-${(props) =>
-  props.height !== undefined &&
+  ${(props) =>
+    props.height !== undefined &&
     css`
-    height: ${props.height};
-  `}
+      height: ${props.height};
+    `}
 
-${(props) =>
-      props.width !== undefined &&
+  ${(props) =>
+    props.width !== undefined &&
     css`
-    width: ${props.width};
-  `}
+      width: ${props.width};
+    `}
 `;
 
 const CardContainer = styled.div`
@@ -55,17 +55,15 @@ const CardContentContainer = styled.div`
 `;
 
 function CardContent({ children }) {
-  return (
-    <CardContentContainer>
-      {children}
-    </CardContentContainer>
-  );
+  return <CardContentContainer>{children}</CardContentContainer>;
 }
 
 function CardTitle({ title }) {
   return (
     <CardTitleContainer>
-      <Text size={TextSizes.NORMAL} weight={TextWeights.BOLD}>{title}</Text>
+      <Text size={TextSizes.NORMAL} weight={TextWeights.BOLD}>
+        {title}
+      </Text>
     </CardTitleContainer>
   );
 }
