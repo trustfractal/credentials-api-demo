@@ -1,6 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Contract, ContractTransaction, providers } from "ethers";
-import { useWeb3 } from "./web3";
 import { GOERLI_CHAIN_ID } from "../lib/constants";
 
 interface Unconfigured {
@@ -53,11 +52,6 @@ type Loadable<T> = T | "loading" | "error" | "go_fetch";
 
 const present = <T>(value: Loadable<T>): boolean => value !== "loading" && value !== "error" && value !== "go_fetch";
 
-const setError = (setter: (a: any) => any) => (err: unknown) => {
-  console.error(err);
-  setter("error");
-};
-
 const fetchFractalId = async (signer: providers.JsonRpcSigner, account: string): Promise<string> => {
   return FractalRegistry.connect(signer).getFractalId(account);
 };
@@ -66,14 +60,20 @@ const fetchKycStatus = async (signer: providers.JsonRpcSigner, fractalId: string
   return FractalRegistry.connect(signer).isUserInList(fractalId, KYCList);
 };
 
-const reportFetchTo = async  <T>(reporter: (v: Loadable<T>) => any, promiser: () => Promise<T>): Promise<void> => {
-  reporter("loading");
-  return promiser()
-    .then(reporter)
-    .catch((e) => {
-      console.error(e);
-      reporter("error")
-    });
+const ensure_loaded = <T>(value: Loadable<T>, reporter: (v: Loadable<T>) => any, fetcher: () => Promise<T>): value is T => {
+  if(present(value)) return true;
+
+  if(value === "go_fetch") {
+    reporter("loading");
+    fetcher()
+      .then(reporter)
+      .catch((e) => {
+        console.error(e);
+        reporter("error")
+      });
+  }
+
+  return false
 }
 
 const reportTransactionTo = <T>(reporter: (v: Loadable<T>) => any, promiser: () => Promise<ContractTransaction>) => async (): Promise<void> => {
@@ -102,24 +102,6 @@ export const useMiniBackoffice = (
   const [kycStatus, setKycStatus] = useState<Loadable<boolean>>("go_fetch");
   const signer = library?.getSigner();
 
-  useEffect(() => {
-    if (!signer || !account || fractalId !== "go_fetch") return;
-
-    reportFetchTo(
-      setFractalId,
-      () => fetchFractalId(signer, account),
-    );
-  }, [account, fractalId]);
-
-  useEffect(() => {
-    if (!signer || !present(fractalId) || fractalId === ZERO_USER || kycStatus !== "go_fetch") return;
-
-    reportFetchTo(
-      setKycStatus,
-      () => fetchKycStatus(signer, fractalId),
-    );
-  }, [account, fractalId, kycStatus]);
-
   if (!account || !signer || !chainId || chainId !== GOERLI_CHAIN_ID) {
     return { status: "Unconfigured" };
   }
@@ -128,7 +110,7 @@ export const useMiniBackoffice = (
     return { status: "Error" };
   }
 
-  if (!present(fractalId) || !present(kycStatus)) {
+  if (!ensure_loaded(fractalId, setFractalId, () => fetchFractalId(signer, account))) {
     return { status: "Loading" };
   }
 
@@ -140,6 +122,10 @@ export const useMiniBackoffice = (
         () => SelfServeRegistryOperator.connect(signer).addSelf(keccak256(account))
       ),
     };
+  }
+
+  if (!ensure_loaded(kycStatus, setKycStatus, () => fetchKycStatus(signer, fractalId))) {
+    return { status: "Loading" };
   }
 
   if (kycStatus) {
