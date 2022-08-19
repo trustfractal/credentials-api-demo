@@ -5,10 +5,11 @@ import { StatusMessage as StatusMessageT } from "../../lib/utils";
 import { KYC_LINK } from "../../lib/config";
 import { Text } from "../ui";
 import { TextSizes, TextWeights } from "../ui/Text";
+import { unreachable } from "lib/types";
 
 const getMessage = (
   statusMessage: StatusMessageT
-): string | React.ReactNode => {
+): React.ReactElement => {
   const { status, data } = statusMessage;
   switch (status) {
     case "APPROVED":
@@ -23,6 +24,7 @@ const getMessage = (
           <strong>Your transaction will succeed.</strong>
         </>
       );
+
     case "NOT_APPROVED":
       return (
         <strong>
@@ -30,13 +32,18 @@ const getMessage = (
           approved Fractal user.
         </strong>
       );
+
     case "TX_SUCCESS":
       return <strong>Your transaction succeeded!</strong>;
+
     case "TX_ERROR":
       return <strong>Your transaction failed.</strong>;
 
+    case "NO_MESSAGE":
+      return <></>;
+
     default:
-      return "";
+      return unreachable(status);
   }
 };
 
