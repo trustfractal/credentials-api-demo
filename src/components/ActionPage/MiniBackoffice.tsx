@@ -4,6 +4,7 @@ import styled from "styled-components";
 import useWeb3 from "../../hooks/web3";
 import { Button, Card as OriginalCard, Text } from "../ui";
 import { TextSizes as _TextSizes } from "../ui/Text";
+import { CenteredElement } from "../ui/Layout/styles/CenteredElement";
 import useMiniBackoffice from "../../hooks/miniBackoffice";
 import { unreachable } from "../../lib/types";
 
@@ -11,6 +12,8 @@ const Card = styled(OriginalCard)`
   color: white;
   background-color: black;
 `;
+
+const NewLine = () => <br />;
 
 const CardBodyContainer = styled.div`
   display: flex;
@@ -44,8 +47,16 @@ export const MiniBackoffice = () => {
     case "UnregisteredUser":
       content = (
         <>
-          <Text size={_TextSizes.EXTRA_SMALL}>❓ Wallet Address not found - click the button to simulate onboarding with Fractal.</Text>
-          <Button onClick={backoffice.registerUser}>Add Wallet Address</Button>
+          <Text size={_TextSizes.EXTRA_SMALL}>
+            ❓ Wallet Address not found - click the button to simulate
+            onboarding with Fractal.
+          </Text>
+          <NewLine />
+          <CenteredElement>
+            <Button onClick={backoffice.registerUser}>
+              Add Wallet Address
+            </Button>
+          </CenteredElement>
         </>
       );
       break;
@@ -56,7 +67,11 @@ export const MiniBackoffice = () => {
             🚫 KYC absent - click the button to your add your wallet address to
             the KYC list.
           </Text>
-          <Button onClick={backoffice.approveUser}>Add KYC</Button>
+          <NewLine />
+          <CenteredElement>
+            {" "}
+            <Button onClick={backoffice.approveUser}>Add KYC</Button>
+          </CenteredElement>
         </>
       );
       break;
@@ -67,7 +82,10 @@ export const MiniBackoffice = () => {
             ✅ KYC Approved - click the button to remove your wallet address
             from the KYC list.
           </Text>
-          <Button onClick={backoffice.disapproveUser}>Remove KYC</Button>
+          <NewLine />
+          <CenteredElement>
+            <Button onClick={backoffice.disapproveUser}>Remove KYC</Button>
+          </CenteredElement>
         </>
       );
       break;
@@ -95,8 +113,10 @@ export const MiniBackoffice = () => {
         <Text />
         <Text size={_TextSizes.EXTRA_SMALL}>
           The status of your wallet address in the Fractal DID Registry is ...
-          {content}
-        </Text>
+          </Text>
+          <NewLine />
+          <CenteredElement>{content}</CenteredElement>
+        
       </CardBodyContainer>
     </Card>
   );

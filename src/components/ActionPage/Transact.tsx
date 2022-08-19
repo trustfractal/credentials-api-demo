@@ -5,6 +5,7 @@ import styled from "styled-components";
 import fractalRegistryABI from "../../assets/fractalRegistryABI.json";
 import { FractalRegistry } from "../../../typechain-types";
 import { Card, Text } from "../ui";
+import { CenteredElement } from "../ui/Layout/styles/CenteredElement";
 import useWeb3 from "../../hooks/web3";
 import { unreachable } from "../../lib/types";
 import { TextSizes as _TextSizes } from "../ui/Text";
@@ -20,6 +21,10 @@ const CardBodyContainer = styled.div`
   justify-content: space-between;
   height: 100%;
 `;
+
+
+
+const NewLine = () => <br />;
 
 const ONE_SECOND = 1000;
 
@@ -61,11 +66,12 @@ export const Transact = () => {
   return (
     <Card title="Purchase eligibility" width="75%">
       <CardBodyContainer>
-      <Text size={_TextSizes.EXTRA_SMALL}>
+        <Text size={_TextSizes.EXTRA_SMALL}>
           Based on the KYC Status, your eligibility is ...
         </Text>{" "}
-        {content}
-        </CardBodyContainer>
+        <NewLine />
+        <CenteredElement>{content}</CenteredElement>
+      </CardBodyContainer>
     </Card>
   );
 };

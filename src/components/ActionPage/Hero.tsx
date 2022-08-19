@@ -54,7 +54,7 @@ const HeroRow = styled.div`
     text-align: left;
     flex-direction: row;
     justify-content: space-between;
-    margin-bottom: 1em;
+    margin-bottom: 2em;
   }
 `;
 
@@ -111,10 +111,12 @@ export default function Hero() {
             <HeroTitleColumn>
               <Title>Fractal&apos;s DID Registry User Demo</Title>
               <SubtitleContainer>
-                <Text size="20px" lineHeight="25px">
+                <Text size="20px" lineHeight="30px">
                   This demo shows how your users will experience logging in with{" "}
-                  <b>DID Registry</b> - one of Fractal&apos;s web3 identity
-                  solutions.
+                  <strong>DID Registry</strong> - one of Fractal&apos;s web3 identity
+                  solutions. <strong>You will need Görli ETH</strong> to complete this demo - get
+                  some <a href="https://goerli-faucet.slock.it/">here</a> or{" "}
+                  <a href="https://goerlifaucet.com/">here.</a>
                 </Text>
               </SubtitleContainer>
             </HeroTitleColumn>
@@ -125,58 +127,65 @@ export default function Hero() {
                 weight={TextWeights.BOLD}
                 lineHeight={TextLineHeights.NORMAL}
               >
-                1. First, connect your wallet.
-                {active ? (
-                  <StatusMessage status={statusMessage} />
-                ) : (
-                  "  Your wallet is not connected."
-                )}
+                1.
+                {active
+                  ? // <StatusMessage status={statusMessage} />
+                    " Your wallet is connected."
+                  : " Connect your wallet."}
               </Text>
             </SubtitleContainer>
           </HeroRow>
           <HeroRow>
             <Connect />
           </HeroRow>
-          <HeroRow>
-            <SubtitleContainer>
-              {active ? (
-                <Text
-                  weight={TextWeights.BOLD}
-                  lineHeight={TextLineHeights.NORMAL}
-                >
-                  2. Next, we need to make sure your wallet address is added to
-                  the DID Registry.
-                  <>
-                    <MiniBackoffice
-                      setCredentialResponse={setCredentialResponse}
-                    />
-                  </>
-                </Text>
-              ) : (
-                ""
-              )}
-            </SubtitleContainer>
-          </HeroRow>
-          <HeroRow>
-            <SubtitleContainer>
-              {active ? (
-                <Text
-                  weight={TextWeights.BOLD}
-                  lineHeight={TextLineHeights.NORMAL}
-                >
-                  3. Depending on your wallet status in the DID Registry, you can purchase or not.
-                  <>
-                    <Transact
-                      credentialResponse={credentialResponse}
-                      setStatusMessage={setStatusMessage}
-                    />
-                  </>
-                </Text>
-              ) : (
-                ""
-              )}
-            </SubtitleContainer>
-          </HeroRow>
+          <br />
+
+          <SubtitleContainer>
+            {active ? (
+              <>
+                <HeroRow>
+                  <Text
+                    weight={TextWeights.BOLD}
+                    lineHeight={TextLineHeights.NORMAL}
+                  >
+                    2. Your wallet address needs to be added to the DID
+                    Registry.
+                  </Text>
+                </HeroRow>
+                <HeroRow>
+                  <MiniBackoffice
+                    setCredentialResponse={setCredentialResponse}
+                  />
+                </HeroRow>
+              </>
+            ) : (
+              ""
+            )}
+          </SubtitleContainer>
+
+          <SubtitleContainer>
+            {active ? (
+              <>
+                <HeroRow>
+                  <Text
+                    weight={TextWeights.BOLD}
+                    lineHeight={TextLineHeights.NORMAL}
+                  >
+                    3. Depending on your wallet status in the DID Registry, you
+                    can purchase or not.
+                  </Text>
+                </HeroRow>
+                <HeroRow>
+                  <Transact
+                    credentialResponse={credentialResponse}
+                    setStatusMessage={setStatusMessage}
+                  />
+                </HeroRow>
+              </>
+            ) : (
+              ""
+            )}
+          </SubtitleContainer>
         </HeroContainer>
       </TopComponent>
     </HeroSection>
