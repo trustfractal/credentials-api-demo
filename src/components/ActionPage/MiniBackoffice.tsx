@@ -44,8 +44,8 @@ export const MiniBackoffice = () => {
     case "UnregisteredUser":
       content = (
         <>
-          <Text size={_TextSizes.EXTRA_LARGE}>❓ Unregistered user</Text>
-          <Button onClick={backoffice.registerUser}>Register</Button>
+          <Text size={_TextSizes.EXTRA_SMALL}>❓ Wallet Address not found - click the button to simulate onboarding with Fractal.</Text>
+          <Button onClick={backoffice.registerUser}>Add Wallet Address</Button>
         </>
       );
       break;
