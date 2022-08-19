@@ -43,7 +43,7 @@ type Backoffice =
   | Loading
   | Error;
 
-const KYCList = "plus";
+export const KYCList = "plus";
 const ZERO_USER =
   "0x0000000000000000000000000000000000000000000000000000000000000000";
 

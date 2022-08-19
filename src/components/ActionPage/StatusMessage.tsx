@@ -7,9 +7,7 @@ import { Text } from "../ui";
 import { TextSizes, TextWeights } from "../ui/Text";
 import { unreachable } from "lib/types";
 
-const getMessage = (
-  statusMessage: StatusMessageT
-): React.ReactElement => {
+const getMessage = (statusMessage: StatusMessageT): React.ReactElement => {
   const { status, data } = statusMessage;
   switch (status) {
     case "APPROVED":

@@ -20,7 +20,6 @@ const CardBodyContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
-  // overflow: scroll;
 `;
 
 export const SingleText = ({ children }: { children: string }) => (

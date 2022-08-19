@@ -6,6 +6,7 @@ import { TextSizes as _TextSizes } from "../ui/Text";
 import { CenteredElement } from "../ui/Layout/styles/CenteredElement";
 import fractalRegistry from "../../contracts/FractalRegistry";
 import useWeb3 from "../../hooks/web3";
+import { KYCList } from "../../hooks/miniBackoffice";
 import { unreachable } from "../../lib/types";
 
 const CardBodyContainer = styled.div`
@@ -34,7 +35,7 @@ export const PurchaseEligibility = () => {
     const interval = setInterval(() => {
       connectRegistry
         .getFractalId(account)
-        .then((fractalId) => connectRegistry.isUserInList(fractalId, "plus"))
+        .then((fractalId) => connectRegistry.isUserInList(fractalId, KYCList))
         .then(setUserInList)
         // eslint-disable-next-line no-console
         .catch((e) => console.error(e));

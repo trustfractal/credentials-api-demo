@@ -59,10 +59,6 @@ const HeroRow = styled.div`
 const HeroTitleColumn = styled.div`
   display: flex;
   flex-direction: column;
-
-  @media (min-width: 768px) {
-    // width: 50%;
-  }
 `;
 
 const SubtitleContainer = styled.div`
@@ -99,7 +95,7 @@ export default function Hero() {
                   <strong>DID Registry</strong> - one of Fractal&apos;s web3
                   identity solutions. <strong>You will need Görli ETH</strong>{" "}
                   to complete this demo - get some{" "}
-                  <a href="https://goerli-faucet.slock.it/">here</a> or{" "}
+                  <a href="https://goerli-faucet.pk910.de/">here</a> or{" "}
                   <a href="https://goerlifaucet.com/">here.</a>
                 </Text>
               </SubtitleContainer>
@@ -113,8 +109,7 @@ export default function Hero() {
               >
                 1.
                 {active
-                  ? // <StatusMessage status={statusMessage} />
-                    " Your wallet is connected."
+                  ? " Your wallet is connected."
                   : " Connect your wallet."}
               </Text>
             </SubtitleContainer>
