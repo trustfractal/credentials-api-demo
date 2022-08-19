@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 
 import { Text, Title, TopComponent } from "../ui";
@@ -6,12 +6,8 @@ import { TextLineHeights, TextWeights } from "../ui/Text";
 
 import useWeb3 from "../../hooks/web3";
 import Connect from "./Connect";
-import StatusMessage from "./StatusMessage";
 import MiniBackoffice from "./MiniBackoffice";
-import Transact from "./Transact";
-
-import { CredentialResponse } from "../../lib/api";
-import { StatusMessage as StatusMessageT } from "../../lib/utils";
+import PurchaseEligibility from "./PurchaseEligibility";
 
 import HeroDots from "../../assets/images/hero_dots.svg";
 
@@ -23,6 +19,7 @@ const HeroSection = styled.section`
     height: auto;
   }
 `;
+
 const HeroContainer = styled.div`
   height: 100%;
   display: flex;
@@ -34,6 +31,7 @@ const HeroContainer = styled.div`
     margin-bottom: 100px;
   }
 `;
+
 const HeroDotsContainer = styled.div`
   position: absolute;
   top: 0;
@@ -67,15 +65,6 @@ const HeroTitleColumn = styled.div`
   }
 `;
 
-const TitleContainer = styled.div`
-  margin-bottom: 29px;
-  text-align: center;
-
-  @media (min-width: 768px) {
-    text-align: left;
-  }
-`;
-
 const SubtitleContainer = styled.div`
   margin: 0.5em;
   text-align: center;
@@ -93,12 +82,6 @@ const SubtitleContainer = styled.div`
 
 export default function Hero() {
   const { active } = useWeb3();
-  const [credentialResponse, setCredentialResponse] = useState<
-    CredentialResponse | undefined
-  >(undefined);
-  const [statusMessage, setStatusMessage] = useState<StatusMessageT>({
-    status: "NO_MESSAGE",
-  });
 
   return (
     <HeroSection>
@@ -153,9 +136,7 @@ export default function Hero() {
                   </Text>
                 </HeroRow>
                 <HeroRow>
-                  <MiniBackoffice
-                    setCredentialResponse={setCredentialResponse}
-                  />
+                  <MiniBackoffice />
                 </HeroRow>
               </>
             ) : (
@@ -176,10 +157,7 @@ export default function Hero() {
                   </Text>
                 </HeroRow>
                 <HeroRow>
-                  <Transact
-                    credentialResponse={credentialResponse}
-                    setStatusMessage={setStatusMessage}
-                  />
+                  <PurchaseEligibility />
                 </HeroRow>
               </>
             ) : (

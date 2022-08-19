@@ -23,11 +23,6 @@ const CardBodyContainer = styled.div`
   // overflow: scroll;
 `;
 
-const InfoTextContainer = styled.div`
-  align-self: center;
-  margin-bottom: 12px;
-`;
-
 export const SingleText = ({ children }: { children: string }) => (
   <>
     <Text>{children}</Text>
@@ -116,7 +111,7 @@ export const MiniBackoffice = () => {
           </Text>
           <NewLine />
           <CenteredElement>{content}</CenteredElement>
-        
+
       </CardBodyContainer>
     </Card>
   );

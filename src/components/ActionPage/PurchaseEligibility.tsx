@@ -21,7 +21,7 @@ const NewLine = () => <br />;
 
 const ONE_SECOND = 1000;
 
-export const Transact = () => {
+export const PurchaseEligibility = () => {
   const { account, library } = useWeb3();
   const [userInList, setUserInList] = useState<boolean | undefined>(undefined);
 
@@ -33,11 +33,11 @@ export const Transact = () => {
 
     const connectRegistry = fractalRegistry.connect(library.getSigner());
 
-    // The result is not used, I just want to use the await syntax.
-    // eslint-disable-next-line @typescript-eslint/no-misused-promises
-    const interval = setInterval(async () => {
-      const fractalId = await connectRegistry.getFractalId(account);
-      setUserInList(await connectRegistry.isUserInList(fractalId, "plus"));
+    const interval = setInterval(() => {
+      connectRegistry
+        .getFractalId(account)
+        .then((fractalId) => connectRegistry.isUserInList(fractalId, "plus"))
+        .then(setUserInList);
     }, ONE_SECOND);
 
     return () => clearInterval(interval);
@@ -69,4 +69,4 @@ export const Transact = () => {
   );
 };
 
-export default Transact;
+export default PurchaseEligibility;
