@@ -1,6 +1,10 @@
 import { useState } from "react";
-import { Contract, ContractTransaction, providers } from "ethers";
+import { ContractTransaction, providers } from "ethers";
+import { keccak256 } from "ethers/lib/utils";
+
 import { GOERLI_CHAIN_ID } from "../lib/constants";
+import fractalRegistry from "../contracts/FractalRegistry";
+import selfServeRegistryOperator from "../contracts/SelfServeRegistryOperator";
 
 interface Unconfigured {
   status: "Unconfigured";
@@ -39,25 +43,10 @@ type Backoffice =
   | Loading
   | Error;
 
-import fractalRegistryABI from "../assets/fractalRegistryABI.json";
-import selfServeRegistryOperatorABI from "../assets/selfServeRegistryOperatorABI.json";
-import { keccak256 } from "ethers/lib/utils";
-import {
-  FractalRegistry,
-  SelfServeRegistryOperator,
-} from "../../typechain-types";
 const KYCList = "plus";
 const ZERO_USER =
   "0x0000000000000000000000000000000000000000000000000000000000000000";
 
-const fractalRegistry = new Contract(
-  "0x4D9DE1bb481B9dA37A7a7E3a07F6f60654fEe7BB",
-  fractalRegistryABI
-) as FractalRegistry;
-const selfServeRegistryOperator = new Contract(
-  "0x75ADb60A0bD28EE81133872401A76A55E215ED47",
-  selfServeRegistryOperatorABI
-) as SelfServeRegistryOperator;
 
 type Loadable<T> = T | "loading" | "error" | "go_fetch";
 

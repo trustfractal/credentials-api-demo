@@ -1,4 +1,9 @@
-[
+import { Contract } from "ethers";
+import { FractalRegistry } from "./types/FractalRegistry";
+
+export type { FractalRegistry };
+
+export const abi = [
   {
     "inputs": [
       {
@@ -166,3 +171,12 @@
     "type": "function"
   }
 ]
+
+export const address = "0x4D9DE1bb481B9dA37A7a7E3a07F6f60654fEe7BB";
+
+export const fractalRegistry = new Contract(
+  address,
+  abi
+) as FractalRegistry;
+
+export default fractalRegistry;

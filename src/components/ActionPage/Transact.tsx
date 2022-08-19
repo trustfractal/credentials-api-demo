@@ -1,19 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Contract } from "ethers";
 import styled from "styled-components";
 
-import fractalRegistryABI from "../../assets/fractalRegistryABI.json";
-import { FractalRegistry } from "../../../typechain-types";
 import { Card, Text } from "../ui";
+import { TextSizes as _TextSizes } from "../ui/Text";
 import { CenteredElement } from "../ui/Layout/styles/CenteredElement";
+import fractalRegistry from "../../contracts/FractalRegistry";
 import useWeb3 from "../../hooks/web3";
 import { unreachable } from "../../lib/types";
-import { TextSizes as _TextSizes } from "../ui/Text";
-
-const fractalRegistry = new Contract(
-  "0x4D9DE1bb481B9dA37A7a7E3a07F6f60654fEe7BB",
-  fractalRegistryABI
-) as FractalRegistry;
 
 const CardBodyContainer = styled.div`
   display: flex;
