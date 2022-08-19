@@ -4,9 +4,10 @@ import styled from "styled-components";
 
 import fractalRegistryABI from "../../assets/fractalRegistryABI.json";
 import { FractalRegistry } from "../../../typechain-types";
-import { Card } from "../ui";
+import { Card, Text } from "../ui";
 import useWeb3 from "../../hooks/web3";
 import { unreachable } from "../../lib/types";
+import { TextSizes as _TextSizes } from "../ui/Text";
 
 const fractalRegistry = new Contract(
   "0x4D9DE1bb481B9dA37A7a7E3a07F6f60654fEe7BB",
@@ -58,8 +59,13 @@ export const Transact = () => {
   }
 
   return (
-    <Card title="Purchase eligibility" width="40%">
-      <CardBodyContainer>{content}</CardBodyContainer>
+    <Card title="Purchase eligibility" width="75%">
+      <CardBodyContainer>
+      <Text size={_TextSizes.EXTRA_SMALL}>
+          Based on the KYC Status, your eligibility is ...
+        </Text>{" "}
+        {content}
+        </CardBodyContainer>
     </Card>
   );
 };

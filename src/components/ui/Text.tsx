@@ -11,6 +11,15 @@ export const TextSizes = {
   EXTRA_LARGE: "27px",
 };
 
+export const TextLineHeights = {
+  EXTRA_EXTRA_SMALL: "17px",
+  EXTRA_SMALL: "21px",
+  SMALL: "25px",
+  NORMAL: "30px",
+  LARGE: "32px",
+  EXTRA_LARGE: "35px",
+};
+
 export const TextWeights = {
   LIGHT: "normal",
   NORMAL: "normal",
@@ -21,16 +30,16 @@ const TextContainer = styled.p`
   ${(props) =>
     css`
       font-size: ${props.size};
-      line-height: ${props.size};
+      line-height: ${props.lineHeight};
       font-weight: ${props.weight};
     `}
 `;
 
-export default function Text(props) {
-  const { children, size, weight } = props;
+export default function Text(props: { children: any; size: string; lineHeight: string; weight: string; }) {
+  const { children, size, lineHeight, weight } = props;
 
   return (
-    <TextContainer size={size} weight={weight}>
+    <TextContainer size={size} weight={weight} lineHeight={lineHeight}>
       {children}
     </TextContainer>
   );
@@ -49,4 +58,5 @@ Text.propTypes = {
 Text.defaultProps = {
   size: TextSizes.NORMAL,
   weight: TextWeights.NORMAL,
+  lineHeight: TextLineHeights.NORMAL,
 };

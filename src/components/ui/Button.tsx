@@ -152,7 +152,13 @@ Button.defaultProps = {
 };
 
 Button.propTypes = {
-  children: PropTypes.element,
+  children:  PropTypes.oneOfType([
+    PropTypes.arrayOf(
+      PropTypes.oneOfType([PropTypes.element, PropTypes.string])
+    ),
+    PropTypes.element,
+    PropTypes.string,
+  ]),
   height: PropTypes.string,
   width: PropTypes.string,
   leftIcon: PropTypes.string,

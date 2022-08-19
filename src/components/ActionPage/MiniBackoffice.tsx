@@ -17,7 +17,7 @@ const CardBodyContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
-  overflow: scroll;
+  // overflow: scroll;
 `;
 
 const InfoTextContainer = styled.div`
@@ -44,7 +44,7 @@ export const MiniBackoffice = () => {
     case "UnregisteredUser":
       content = (
         <>
-          <Text>❓ Unregistered user</Text>
+          <Text size={_TextSizes.EXTRA_LARGE}>❓ Unregistered user</Text>
           <Button onClick={backoffice.registerUser}>Register</Button>
         </>
       );
@@ -52,21 +52,27 @@ export const MiniBackoffice = () => {
     case "KYCAbsent":
       content = (
         <>
-          <Text>🚫 KYC absent</Text>
-          <Button onClick={backoffice.approveUser}>Approve</Button>
+          <Text size={_TextSizes.EXTRA_SMALL}>
+            🚫 KYC absent - click the button to your add your wallet address to
+            the KYC list.
+          </Text>
+          <Button onClick={backoffice.approveUser}>Add KYC</Button>
         </>
       );
       break;
     case "KYCApproved":
       content = (
         <>
-          <Text>✅ KYC Approved</Text>
-          <Button onClick={backoffice.disapproveUser}>Disapprove</Button>
+          <Text size={_TextSizes.EXTRA_SMALL}>
+            ✅ KYC Approved - click the button to remove your wallet address
+            from the KYC list.
+          </Text>
+          <Button onClick={backoffice.disapproveUser}>Remove KYC</Button>
         </>
       );
       break;
     case "Loading":
-      content = <SingleText>Working...</SingleText>;
+      content = <SingleText>Updating the Registry...</SingleText>;
       break;
     case "Error":
       content = (
@@ -80,12 +86,17 @@ export const MiniBackoffice = () => {
   }
 
   return (
-    <Card title="Mini Backoffice" width="40%">
+    <Card title="Actions performed by Fractal's servers" width="90%">
       <CardBodyContainer>
-        <InfoTextContainer>
-          Simulate Fractal server&apos;s verification activity.
-        </InfoTextContainer>
-        {content}
+        <Text>
+          These transaction show you how Fractal updates the DID Registry. The
+          user would not be asked to do these transactions.{" "}
+        </Text>{" "}
+        <Text />
+        <Text size={_TextSizes.EXTRA_SMALL}>
+          The status of your wallet address in the Fractal DID Registry is ...
+          {content}
+        </Text>
       </CardBodyContainer>
     </Card>
   );

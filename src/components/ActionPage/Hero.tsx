@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 
 import { Text, Title, TopComponent } from "../ui";
-import { TextWeights } from "../ui/Text";
+import { TextLineHeights, TextWeights } from "../ui/Text";
 
 import useWeb3 from "../../hooks/web3";
 import Connect from "./Connect";
@@ -54,7 +54,7 @@ const HeroRow = styled.div`
     text-align: left;
     flex-direction: row;
     justify-content: space-between;
-    margin-bottom: 50px;
+    margin-bottom: 1em;
   }
 `;
 
@@ -63,7 +63,7 @@ const HeroTitleColumn = styled.div`
   flex-direction: column;
 
   @media (min-width: 768px) {
-    width: 50%;
+    // width: 50%;
   }
 `;
 
@@ -77,7 +77,7 @@ const TitleContainer = styled.div`
 `;
 
 const SubtitleContainer = styled.div`
-  margin-bottom: 29px;
+  margin: 0.5em;
   text-align: center;
 
   @media (min-width: 768px) {
@@ -109,33 +109,73 @@ export default function Hero() {
         <HeroContainer>
           <HeroRow>
             <HeroTitleColumn>
-              <TitleContainer>
-                <Title>Experience the easiest web3 KYC flow with Fractal</Title>
-              </TitleContainer>
+              <Title>Fractal&apos;s DID Registry User Demo</Title>
               <SubtitleContainer>
-                <Text>
-                  Existing Fractal users (we have 1M and counting) can be
-                  onboarded instantly
+                <Text size="20px" lineHeight="25px">
+                  This demo shows how your users will experience logging in with{" "}
+                  <b>DID Registry</b> - one of Fractal&apos;s web3 identity
+                  solutions.
                 </Text>
               </SubtitleContainer>
-              <SubtitleContainer>
+            </HeroTitleColumn>
+          </HeroRow>
+          <HeroRow>
+            <SubtitleContainer>
+              <Text
+                weight={TextWeights.BOLD}
+                lineHeight={TextLineHeights.NORMAL}
+              >
+                1. First, connect your wallet.
                 {active ? (
                   <StatusMessage status={statusMessage} />
                 ) : (
-                  <Text weight={TextWeights.BOLD}>
-                    Connect your wallet to get started!
-                  </Text>
+                  "  Your wallet is not connected."
                 )}
-              </SubtitleContainer>
-            </HeroTitleColumn>
+              </Text>
+            </SubtitleContainer>
+          </HeroRow>
+          <HeroRow>
             <Connect />
           </HeroRow>
           <HeroRow>
-            <MiniBackoffice setCredentialResponse={setCredentialResponse} />
-            <Transact
-              credentialResponse={credentialResponse}
-              setStatusMessage={setStatusMessage}
-            />
+            <SubtitleContainer>
+              {active ? (
+                <Text
+                  weight={TextWeights.BOLD}
+                  lineHeight={TextLineHeights.NORMAL}
+                >
+                  2. Next, we need to make sure your wallet address is added to
+                  the DID Registry.
+                  <>
+                    <MiniBackoffice
+                      setCredentialResponse={setCredentialResponse}
+                    />
+                  </>
+                </Text>
+              ) : (
+                ""
+              )}
+            </SubtitleContainer>
+          </HeroRow>
+          <HeroRow>
+            <SubtitleContainer>
+              {active ? (
+                <Text
+                  weight={TextWeights.BOLD}
+                  lineHeight={TextLineHeights.NORMAL}
+                >
+                  3. Depending on your wallet status in the DID Registry, you can purchase or not.
+                  <>
+                    <Transact
+                      credentialResponse={credentialResponse}
+                      setStatusMessage={setStatusMessage}
+                    />
+                  </>
+                </Text>
+              ) : (
+                ""
+              )}
+            </SubtitleContainer>
           </HeroRow>
         </HeroContainer>
       </TopComponent>
