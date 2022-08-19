@@ -1,3 +1,3 @@
-export const unreachable = (message?: string): never => {
-  throw Error(message || "Reached unreachable");
+export const unreachable = (obj: never): never => {
+  throw Error(`Reached unreachable: ${JSON.stringify(obj)}`);
 };
