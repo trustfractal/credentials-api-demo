@@ -152,7 +152,7 @@ Button.defaultProps = {
 };
 
 Button.propTypes = {
-  children:  PropTypes.oneOfType([
+  children: PropTypes.oneOfType([
     PropTypes.arrayOf(
       PropTypes.oneOfType([PropTypes.element, PropTypes.string])
     ),

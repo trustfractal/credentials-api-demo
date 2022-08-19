@@ -62,7 +62,8 @@ export const Connect = () => {
             {chainId === GOERLI_CHAIN_ID ? "🟢" : "🔴"}
           </Text>
           <Text size={TextSizes.EXTRA_SMALL}>
-            If you have a wallet address already in the Registry, connect that one!
+            If you have a wallet address already in the Registry, connect that
+            one!
           </Text>
           <CenteredElement>
             <br />

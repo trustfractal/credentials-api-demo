@@ -108,10 +108,9 @@ export const MiniBackoffice = () => {
         <Text />
         <Text size={_TextSizes.EXTRA_SMALL}>
           The status of your wallet address in the Fractal DID Registry is ...
-          </Text>
-          <NewLine />
-          <CenteredElement>{content}</CenteredElement>
-
+        </Text>
+        <NewLine />
+        <CenteredElement>{content}</CenteredElement>
       </CardBodyContainer>
     </Card>
   );

@@ -96,9 +96,10 @@ export default function Hero() {
               <SubtitleContainer>
                 <Text size="20px" lineHeight="30px">
                   This demo shows how your users will experience logging in with{" "}
-                  <strong>DID Registry</strong> - one of Fractal&apos;s web3 identity
-                  solutions. <strong>You will need Görli ETH</strong> to complete this demo - get
-                  some <a href="https://goerli-faucet.slock.it/">here</a> or{" "}
+                  <strong>DID Registry</strong> - one of Fractal&apos;s web3
+                  identity solutions. <strong>You will need Görli ETH</strong>{" "}
+                  to complete this demo - get some{" "}
+                  <a href="https://goerli-faucet.slock.it/">here</a> or{" "}
                   <a href="https://goerlifaucet.com/">here.</a>
                 </Text>
               </SubtitleContainer>

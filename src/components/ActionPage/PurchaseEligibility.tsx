@@ -15,8 +15,6 @@ const CardBodyContainer = styled.div`
   height: 100%;
 `;
 
-
-
 const NewLine = () => <br />;
 
 const ONE_SECOND = 1000;

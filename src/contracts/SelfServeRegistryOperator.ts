@@ -5,69 +5,69 @@ export type { SelfServeRegistryOperator };
 
 export const abi = [
   {
-    "inputs": [
+    inputs: [
       {
-        "internalType": "address",
-        "name": "registryAddr",
-        "type": "address"
-      }
+        internalType: "address",
+        name: "registryAddr",
+        type: "address",
+      },
     ],
-    "stateMutability": "nonpayable",
-    "type": "constructor"
+    stateMutability: "nonpayable",
+    type: "constructor",
   },
   {
-    "inputs": [
+    inputs: [
       {
-        "internalType": "bytes32",
-        "name": "fractalId",
-        "type": "bytes32"
-      }
+        internalType: "bytes32",
+        name: "fractalId",
+        type: "bytes32",
+      },
     ],
-    "name": "addSelf",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
+    name: "addSelf",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
   },
   {
-    "inputs": [
+    inputs: [
       {
-        "internalType": "string",
-        "name": "listId",
-        "type": "string"
-      }
+        internalType: "string",
+        name: "listId",
+        type: "string",
+      },
     ],
-    "name": "addSelfToList",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
+    name: "addSelfToList",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
   },
   {
-    "inputs": [],
-    "name": "removeSelf",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
+    inputs: [],
+    name: "removeSelf",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
   },
   {
-    "inputs": [
+    inputs: [
       {
-        "internalType": "string",
-        "name": "listId",
-        "type": "string"
-      }
+        internalType: "string",
+        name: "listId",
+        type: "string",
+      },
     ],
-    "name": "removeSelfFromList",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  }
-]
+    name: "removeSelfFromList",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+];
 
 export const address = "0x75ADb60A0bD28EE81133872401A76A55E215ED47";
 
 export const selfServeRegistryOperator = new Contract(
   address,
-  abi,
+  abi
 ) as SelfServeRegistryOperator;
 
-export default selfServeRegistryOperator
+export default selfServeRegistryOperator;

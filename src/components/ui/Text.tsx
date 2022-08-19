@@ -35,7 +35,12 @@ const TextContainer = styled.p`
     `}
 `;
 
-export default function Text(props: { children: any; size: string; lineHeight: string; weight: string; }) {
+export default function Text(props: {
+  children: any;
+  size: string;
+  lineHeight: string;
+  weight: string;
+}) {
   const { children, size, lineHeight, weight } = props;
 
   return (

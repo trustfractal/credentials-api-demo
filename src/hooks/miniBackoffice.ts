@@ -47,7 +47,6 @@ const KYCList = "plus";
 const ZERO_USER =
   "0x0000000000000000000000000000000000000000000000000000000000000000";
 
-
 type Loadable<T> = T | "loading" | "error" | "go_fetch";
 
 const present = <T>(value: Loadable<T>): boolean =>
