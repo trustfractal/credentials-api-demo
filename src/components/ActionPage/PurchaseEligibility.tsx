@@ -35,7 +35,9 @@ export const PurchaseEligibility = () => {
       connectRegistry
         .getFractalId(account)
         .then((fractalId) => connectRegistry.isUserInList(fractalId, "plus"))
-        .then(setUserInList);
+        .then(setUserInList)
+        // eslint-disable-next-line no-console
+        .catch((e) => console.error(e));
     }, ONE_SECOND);
 
     return () => clearInterval(interval);

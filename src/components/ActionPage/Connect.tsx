@@ -33,6 +33,7 @@ export const Connect = () => {
       // activate(connector, errorCallback, throwError)
       await activate(injectedConnector, undefined, true);
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error(error);
     }
   };

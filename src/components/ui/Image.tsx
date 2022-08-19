@@ -56,9 +56,11 @@ export default function Image(props) {
     `
   );
 
-  console.log(data);
-
   const image = getImage(data[name]);
+
+  if (image === undefined) {
+    throw new Error(`Unknown image: ${name}`);
+  }
 
   return (
     <RootContainer clickable={clickable} onClick={onClick}>

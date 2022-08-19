@@ -42,7 +42,7 @@ export default function About() {
             <Subtitle>About this demo</Subtitle>
           </TitleContainer>
           <TextContainer>
-            <Text size={TextSizes.MEDIUM}>
+            <Text size={TextSizes.NORMAL}>
               This page is the frontend to a dApp that requires KYC. Normally
               you wouldn’t even see the “Make transaction” button until you’re
               KYC-approved, but we’re showing it already so you can test that it

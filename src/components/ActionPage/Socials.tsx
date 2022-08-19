@@ -62,7 +62,7 @@ export default function Socials() {
             <Subtitle>We are a global community</Subtitle>
           </TitleContainer>
           <TextContainer>
-            <Text size={TextSizes.MEDIUM}>
+            <Text size={TextSizes.NORMAL}>
               Learn more about us, talk with others in the community and
               participate in creating the future
             </Text>

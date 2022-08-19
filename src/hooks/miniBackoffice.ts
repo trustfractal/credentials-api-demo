@@ -92,7 +92,9 @@ const reportTransactionTo =
     try {
       tx = await promiser();
     } catch (e) {
-      // Typically, the user rejected the transaction.
+      // Typically, the user rejected the transaction. However, let's keep it
+      // here to debug other cases.
+      // eslint-disable-next-line no-console
       console.error(e);
       return;
     }
