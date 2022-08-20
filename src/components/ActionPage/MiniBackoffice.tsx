@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import useWeb3 from "../../hooks/web3";
 import { Button, Card as OriginalCard, Text } from "../ui";
-import { TextSizes as _TextSizes } from "../ui/Text";
+import { TextSizes } from "../ui/Text";
 import { CenteredElement } from "../ui/Layout/styles/CenteredElement";
 import useMiniBackoffice from "../../hooks/miniBackoffice";
 import { unreachable } from "../../lib/types";
@@ -41,7 +41,7 @@ export const MiniBackoffice = () => {
     case "UnregisteredUser":
       content = (
         <>
-          <Text size={_TextSizes.EXTRA_SMALL}>
+          <Text size={TextSizes.EXTRA_SMALL}>
             ❓ Wallet Address not found - click the button to simulate
             onboarding with Fractal.
           </Text>
@@ -57,7 +57,7 @@ export const MiniBackoffice = () => {
     case "KYCAbsent":
       content = (
         <>
-          <Text size={_TextSizes.EXTRA_SMALL}>
+          <Text size={TextSizes.EXTRA_SMALL}>
             🚫 KYC absent - click the button to your add your wallet address to
             the KYC list.
           </Text>
@@ -72,7 +72,7 @@ export const MiniBackoffice = () => {
     case "KYCApproved":
       content = (
         <>
-          <Text size={_TextSizes.EXTRA_SMALL}>
+          <Text size={TextSizes.EXTRA_SMALL}>
             ✅ KYC Approved - click the button to remove your wallet address
             from the KYC list.
           </Text>
@@ -105,7 +105,7 @@ export const MiniBackoffice = () => {
           user would not be asked to do these transactions.{" "}
         </Text>{" "}
         <Text />
-        <Text size={_TextSizes.EXTRA_SMALL}>
+        <Text size={TextSizes.EXTRA_SMALL}>
           The status of your wallet address in the Fractal DID Registry is ...
         </Text>
         <NewLine />
