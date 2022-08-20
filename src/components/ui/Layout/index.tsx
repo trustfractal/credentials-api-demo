@@ -1,5 +1,4 @@
 import * as React from "react";
-import PropTypes from "prop-types";
 import styled from "styled-components";
 
 import Head from "../Head";
@@ -14,9 +13,7 @@ const LayoutContainer = styled.div`
   overflow: hidden;
 `;
 
-export default function Layout(props) {
-  const { children } = props;
-
+export default function Layout({ children }: React.PropsWithChildren) {
   return (
     <>
       <GlobalStyle />
@@ -26,11 +23,3 @@ export default function Layout(props) {
     </>
   );
 }
-
-Layout.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.element),
-    PropTypes.element,
-  ]),
-  title: PropTypes.string,
-};

@@ -1,11 +1,11 @@
 import * as React from "react";
-import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 
 import { Text } from "../ui";
 import { TextSizes, TextWeights } from "./Text";
 
-const cardStyles = css`
+type CardStyleProps = { height?: string; width?: string };
+const cardStyles = css<CardStyleProps>`
   background-color: var(--c-white);
 
   border-radius: 10px;
@@ -36,7 +36,8 @@ const cardStyles = css`
     `}
 `;
 
-const CardContainer = styled.div`
+type CardContainerProps = CardStyleProps;
+const CardContainer = styled.div<CardContainerProps>`
   ${cardStyles}
 `;
 
@@ -54,11 +55,12 @@ const CardContentContainer = styled.div`
   flex-grow: 1;
 `;
 
-function CardContent({ children }) {
+function CardContent({ children }: React.PropsWithChildren) {
   return <CardContentContainer>{children}</CardContentContainer>;
 }
 
-function CardTitle({ title }) {
+type CardTitleProps = { title: string };
+function CardTitle({ title }: CardTitleProps) {
   return (
     <CardTitleContainer>
       <Text size={TextSizes.NORMAL} weight={TextWeights.BOLD}>
@@ -68,17 +70,12 @@ function CardTitle({ title }) {
   );
 }
 
-Card.propTypes = {
-  children: PropTypes.element,
-  title: PropTypes.string,
-};
-
-export default function Card(props) {
-  const { title, ...otherProps } = props;
+type CardProps = React.PropsWithChildren<CardContainerProps & CardTitleProps>;
+export default function Card({ title, children, ...otherProps }: CardProps) {
   return (
     <CardContainer {...otherProps}>
       {title && <CardTitle title={title} />}
-      <CardContent {...props} />
+      <CardContent>{children}</CardContent>
     </CardContainer>
   );
 }

@@ -1,5 +1,4 @@
 import * as React from "react";
-import PropTypes from "prop-types";
 import styled from "styled-components";
 
 const SubtitleContainer = styled.h2`
@@ -8,12 +7,6 @@ const SubtitleContainer = styled.h2`
   line-height: 36px;
 `;
 
-export default function Subtitle(props) {
-  const { children } = props;
-
+export default function Subtitle({ children }: React.PropsWithChildren) {
   return <SubtitleContainer>{children}</SubtitleContainer>;
 }
-
-Subtitle.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
-};

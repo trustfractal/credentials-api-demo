@@ -1,10 +1,12 @@
 import * as React from "react";
-import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 import { graphql, useStaticQuery } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 
-const RootContainer = styled.div`
+type RootContainerProps = React.ComponentPropsWithoutRef<"div"> & {
+  clickable?: boolean;
+};
+const RootContainer = styled.div<RootContainerProps>`
   ${(props) =>
     props.clickable &&
     css`
@@ -16,18 +18,12 @@ export const ImageNames = {
   BLOCKCHAIN_INDUSTRY: "blockchain_industry",
   CRYPTO_TODAY: "crypto_today",
   EXPLORING_BLOCKCHAIN: "exploring_blockchain",
-};
+} as const;
 
-Image.propTypes = {
-  name: PropTypes.oneOf(Object.values(ImageNames)),
-  clickable: PropTypes.bool,
+type ImageProps = RootContainerProps & {
+  name: typeof ImageNames[keyof typeof ImageNames];
 };
-
-Image.defaultProps = {
-  clickable: false,
-};
-
-export default function Image(props) {
+export default function Image(props: ImageProps) {
   const { name, clickable, onClick } = props;
 
   const data = useStaticQuery(

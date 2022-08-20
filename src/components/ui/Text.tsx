@@ -1,5 +1,4 @@
 import * as React from "react";
-import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 
 export const TextSizes = {
@@ -26,7 +25,12 @@ export const TextWeights = {
   BOLD: "bold",
 };
 
-const TextContainer = styled.p`
+type TextContainerProps = {
+  size: string;
+  lineHeight: string;
+  weight: string;
+};
+const TextContainer = styled.p<TextContainerProps>`
   ${(props) =>
     css`
       font-size: ${props.size};
@@ -35,33 +39,14 @@ const TextContainer = styled.p`
     `}
 `;
 
-export default function Text(props: {
-  children: any;
-  size: string;
-  lineHeight: string;
-  weight: string;
-}) {
-  const { children, size, lineHeight, weight } = props;
-
-  return (
-    <TextContainer size={size} weight={weight} lineHeight={lineHeight}>
-      {children}
-    </TextContainer>
-  );
-}
-
-Text.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(
-      PropTypes.oneOfType([PropTypes.element, PropTypes.string])
-    ),
-    PropTypes.element,
-    PropTypes.string,
-  ]),
-};
-
 Text.defaultProps = {
   size: TextSizes.NORMAL,
   weight: TextWeights.NORMAL,
   lineHeight: TextLineHeights.NORMAL,
 };
+export default function Text({
+  children,
+  ...otherProps
+}: React.PropsWithChildren<TextContainerProps>) {
+  return <TextContainer {...otherProps}>{children}</TextContainer>;
+}

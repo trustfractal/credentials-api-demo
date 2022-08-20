@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 
-import { Button, Subtitle, Text, TopComponent } from "../ui";
+import { AnchorButton, Subtitle, Text, TopComponent } from "../ui";
 import { TextSizes, TextWeights } from "../ui/Text";
 import { DOCS_URL } from "../../lib/config";
 
@@ -51,11 +51,11 @@ export default function About() {
             </Text>
           </TextContainer>
           <ButtonContainer>
-            <Button href={DOCS_URL} target="_blank" rel="noreferrer">
+            <AnchorButton href={DOCS_URL} target="_blank" rel="noreferrer">
               <Text size={TextSizes.SMALL} weight={TextWeights.BOLD}>
                 Developer documentation
               </Text>
-            </Button>
+            </AnchorButton>
           </ButtonContainer>
         </AboutContainer>
       </TopComponent>

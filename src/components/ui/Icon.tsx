@@ -1,5 +1,4 @@
 import * as React from "react";
-import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 
 import Discord from "../../assets/icons/discord.svg";
@@ -7,7 +6,10 @@ import Reddit from "../../assets/icons/reddit.svg";
 import Telegram from "../../assets/icons/telegram.svg";
 import Twitter from "../../assets/icons/twitter.svg";
 
-const RootContainer = styled.div`
+type RootContainerProps = React.ComponentPropsWithoutRef<"div"> & {
+  clickable?: boolean;
+};
+const RootContainer = styled.div<RootContainerProps>`
   ${(props) =>
     props.clickable &&
     css`
@@ -20,7 +22,8 @@ export const IconNames = {
   REDDIT: "reddit",
   TELEGRAM: "telegram",
   TWITTER: "twitter",
-};
+} as const;
+export type IconName = typeof IconNames[keyof typeof IconNames];
 
 const Icons = {
   [IconNames.DISCORD]: Discord,
@@ -29,16 +32,15 @@ const Icons = {
   [IconNames.TWITTER]: Twitter,
 };
 
-Icon.propTypes = {
-  name: PropTypes.oneOf(Object.values(IconNames)),
-  clickable: PropTypes.bool,
-};
+type IconProps = React.ComponentPropsWithoutRef<"svg"> &
+  Pick<RootContainerProps, "clickable" | "onClick"> & {
+    name: IconName;
+  };
 
 Icon.defaultProps = {
   clickable: false,
 };
-
-function Icon(props) {
+function Icon(props: IconProps) {
   const { name, clickable, onClick, ...otherProps } = props;
 
   const Svg = Icons[name];

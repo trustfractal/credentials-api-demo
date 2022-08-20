@@ -1,5 +1,4 @@
 import * as React from "react";
-import PropTypes from "prop-types";
 import styled from "styled-components";
 
 const RootContainer = styled.div`
@@ -13,16 +12,8 @@ const RootContainer = styled.div`
   }
 `;
 
-export default function TopComponent(props) {
+export default function TopComponent(props: React.PropsWithChildren) {
   const { children } = props;
 
   return <RootContainer>{children}</RootContainer>;
 }
-
-TopComponent.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.element),
-    PropTypes.element,
-  ]),
-  title: PropTypes.string,
-};

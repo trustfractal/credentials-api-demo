@@ -1,12 +1,13 @@
+import { unreachable } from "lib/types";
 import React, { useMemo } from "react";
 import styled from "styled-components";
 import { StepStatus } from "../../lib/utils";
 
 type DISPLAY_STATUS = "NOT_STARTED" | "LOADING" | "ERROR" | "SUCCESS";
 
-const StepContainer = styled.li`
+const StepContainer = styled.li<{ active: boolean }>`
   margin-bottom: 12px;
-  opacity: ${({ active }: { active: boolean }) => (active ? "1" : "0.5")};
+  opacity: ${({ active }) => (active ? "1" : "0.5")};
 `;
 
 const getSuffixIcon = (status: DISPLAY_STATUS) => {
@@ -17,8 +18,10 @@ const getSuffixIcon = (status: DISPLAY_STATUS) => {
       return "❌";
     case "SUCCESS":
       return "✅";
-    default:
+    case "NOT_STARTED":
       return "";
+    default:
+      return unreachable(status);
   }
 };
 

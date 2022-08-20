@@ -1,4 +1,4 @@
-import Button from "./Button";
+import Button, { AnchorButton } from "./Button";
 import Card from "./Card";
 import Head from "./Head";
 import Icon from "./Icon";
@@ -11,6 +11,7 @@ import Title from "./Title";
 import TopComponent from "./TopComponent";
 
 export {
+  AnchorButton,
   Button,
   Card,
   Head,

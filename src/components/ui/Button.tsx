@@ -1,11 +1,17 @@
 import * as React from "react";
-import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 
 import Text from "./Text";
-import Icon from "./Icon";
+import Icon, { IconName } from "./Icon";
 
-const buttonStyles = css`
+type ButtonStyleProps = {
+  alt?: string;
+  disabled?: boolean;
+  height?: string;
+  loading?: boolean;
+  width?: string;
+};
+const buttonStyles = css<ButtonStyleProps>`
   user-select: none;
 
   background-color: var(--c-orange);
@@ -68,16 +74,10 @@ ${(props) =>
     `}
 `;
 
+type ButtonContainerProps = React.ComponentPropsWithoutRef<"button"> &
+  ButtonStyleProps;
 const ButtonContainer = styled.button`
   ${buttonStyles}
-`;
-
-const AnchorContainer = styled.a`
-  ${buttonStyles}
-
-  cursor: pointer;
-  text-decoration: none;
-  width: fit-content;
 `;
 
 const LeftIconContainer = styled.div`
@@ -90,7 +90,12 @@ const RightIconContainer = styled.div`
   display: flex;
 `;
 
-function ButtonContent(props) {
+type ButtonContentProps = React.PropsWithChildren<{
+  loading?: boolean;
+  leftIcon?: IconName;
+  rightIcon?: IconName;
+}>;
+function ButtonContent(props: ButtonContentProps) {
   const { loading, leftIcon, rightIcon, children } = props;
 
   if (loading) {
@@ -114,27 +119,24 @@ function ButtonContent(props) {
   );
 }
 
-export default function Button(props) {
-  const { loading, disabled, href, target, type, alt, ...otherProps } = props;
+type ButtonOwnProps = {
+  loading: boolean;
+};
+type ButtonProps = ButtonOwnProps & ButtonContentProps & ButtonContainerProps;
 
-  if (href) {
-    return (
-      <AnchorContainer
-        href={href}
-        target={target}
-        alt={alt.toString()}
-        disabled={disabled || loading}
-        {...otherProps}
-      >
-        <ButtonContent {...props} />
-      </AnchorContainer>
-    );
-  }
+Button.defaultProps = {
+  type: "button",
+  alt: false,
+  disabled: false,
+  loading: false,
+};
 
+export default function Button(props: ButtonProps) {
+  const { loading, disabled, type, alt, ...otherProps } = props;
   return (
     <ButtonContainer
       type={type}
-      alt={alt.toString()}
+      alt={alt?.toString()}
       disabled={disabled || loading}
       {...otherProps}
     >
@@ -143,30 +145,41 @@ export default function Button(props) {
   );
 }
 
-Button.defaultProps = {
+type AnchorContainerProps = React.ComponentPropsWithoutRef<"a"> &
+  ButtonStyleProps;
+const AnchorContainer = styled.a<ButtonStyleProps>`
+  ${buttonStyles}
+
+  cursor: pointer;
+  text-decoration: none;
+  width: fit-content;
+`;
+
+type AnchorButtonOwnProps = {
+  loading: boolean;
+};
+type AnchorButtonProps = AnchorButtonOwnProps &
+  ButtonContentProps &
+  AnchorContainerProps;
+
+AnchorButton.defaultProps = {
   target: "_blank",
-  type: "button",
   alt: false,
   disabled: false,
   loading: false,
 };
 
-Button.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(
-      PropTypes.oneOfType([PropTypes.element, PropTypes.string])
-    ),
-    PropTypes.element,
-    PropTypes.string,
-  ]),
-  height: PropTypes.string,
-  width: PropTypes.string,
-  leftIcon: PropTypes.string,
-  rightIcon: PropTypes.string,
-  alt: PropTypes.bool,
-  href: PropTypes.string,
-  target: PropTypes.oneOf(["_blank", "_self", "_parent", "_top"]),
-  type: PropTypes.oneOf(["button", "submit", "reset"]),
-  disabled: PropTypes.bool,
-  loading: PropTypes.bool,
-};
+export function AnchorButton(props: AnchorButtonProps) {
+  const { loading, disabled, href, target, alt, ...otherProps } = props;
+  return (
+    <AnchorContainer
+      href={href}
+      target={target}
+      alt={alt?.toString()}
+      disabled={disabled || loading}
+      {...otherProps}
+    >
+      <ButtonContent {...props} />
+    </AnchorContainer>
+  );
+}

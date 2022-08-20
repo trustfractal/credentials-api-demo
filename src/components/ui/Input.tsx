@@ -1,6 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 
+type InputContainerProps = React.ComponentPropsWithoutRef<"input">;
 const InputContainer = styled.input`
   background-color: var(--c-dark-pink);
   color: var(--c-white);
@@ -53,6 +54,6 @@ const InputContainer = styled.input`
   }
 `;
 
-export default function Input(props) {
+export default function Input(props: InputContainerProps) {
   return <InputContainer {...props} />;
 }

@@ -39,7 +39,7 @@ export const Connect = () => {
   };
 
   const switchToGoerliChain = () => {
-    if (library && library.provider) {
+    if (library && library.provider && library.provider.request) {
       void library.provider.request({
         method: "wallet_switchEthereumChain",
         params: [{ chainId: `0x${GOERLI_CHAIN_ID}` }],
