@@ -69,7 +69,7 @@ export const Connect = () => {
           <CenteredElement>
             <br />
             {!active ? (
-              <Button width="50%" onClick={connect}>
+              <Button width="50%" onClick={connect as () => void}>
                 Connect wallet
               </Button>
             ) : (

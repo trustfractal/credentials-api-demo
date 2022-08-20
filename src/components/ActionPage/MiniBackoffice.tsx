@@ -47,7 +47,7 @@ export const MiniBackoffice = () => {
           </Text>
           <NewLine />
           <CenteredElement>
-            <Button onClick={backoffice.registerUser}>
+            <Button onClick={backoffice.registerUser as () => void}>
               Add Wallet Address
             </Button>
           </CenteredElement>
@@ -64,7 +64,9 @@ export const MiniBackoffice = () => {
           <NewLine />
           <CenteredElement>
             {" "}
-            <Button onClick={backoffice.approveUser}>Add KYC</Button>
+            <Button onClick={backoffice.approveUser as () => void}>
+              Add KYC
+            </Button>
           </CenteredElement>
         </>
       );
@@ -78,7 +80,9 @@ export const MiniBackoffice = () => {
           </Text>
           <NewLine />
           <CenteredElement>
-            <Button onClick={backoffice.disapproveUser}>Remove KYC</Button>
+            <Button onClick={backoffice.disapproveUser as () => void}>
+              Remove KYC
+            </Button>
           </CenteredElement>
         </>
       );
