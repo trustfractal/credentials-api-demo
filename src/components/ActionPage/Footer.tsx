@@ -168,5 +168,3 @@ export default function Footer() {
     </FooterSection>
   );
 }
-
-Footer.propTypes = {};

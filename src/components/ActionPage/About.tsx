@@ -62,5 +62,3 @@ export default function About() {
     </AboutSection>
   );
 }
-
-About.propTypes = {};

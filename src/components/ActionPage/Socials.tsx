@@ -102,5 +102,3 @@ export default function Socials() {
     </SocialsSection>
   );
 }
-
-Socials.propTypes = {};

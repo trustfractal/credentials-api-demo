@@ -79,5 +79,3 @@ export default function Header() {
     </HeaderSection>
   );
 }
-
-Header.propTypes = {};

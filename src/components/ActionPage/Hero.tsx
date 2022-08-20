@@ -165,5 +165,3 @@ export default function Hero() {
     </HeroSection>
   );
 }
-
-Hero.propTypes = {};
