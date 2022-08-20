@@ -43,7 +43,7 @@ export default function CallToAction() {
             <Subtitle>Stay updated to the latest news</Subtitle>
           </TitleContainer>
           <ActionsContainer>
-            <Input type="email" placeholder="Enter your email adress here" />
+            <Input type="email" placeholder="Enter your email address here" />
             <ButtonContainer>
               <Button height="50px">
                 <Text size={TextSizes.LARGE} weight={TextWeights.BOLD}>
