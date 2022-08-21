@@ -27,6 +27,7 @@ interface KYCAbsent {
   status: "KYCAbsent";
   fractalId: string;
   approveUser: () => Promise<void>;
+  unRegisterUser: () => Promise<void>;
 }
 
 interface KYCApproved {
@@ -163,6 +164,9 @@ export const useMiniBackoffice = (
     fractalId,
     approveUser: reportTransactionTo(setKycStatus, () =>
       selfServeRegistryOperator.connect(signer).addSelfToList(KYCList)
+    ),
+    unRegisterUser: reportTransactionTo(setFractalId, () =>
+      selfServeRegistryOperator.connect(signer).removeSelf()
     ),
   };
 };

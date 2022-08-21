@@ -23,10 +23,10 @@ const HeroSection = styled.section`
 const HeroContainer = styled.div`
   height: 100%;
   display: flex;
-  flex-direction column;
+  flex-direction: column;
   justify-content: space-around;
 
-  @media(min-width: 768px) {
+  @media (min-width: 768px) {
     display: block;
     margin-bottom: 100px;
   }

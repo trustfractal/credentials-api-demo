@@ -4,7 +4,7 @@ import styled from "styled-components";
 import useWeb3 from "../../hooks/web3";
 import { Button, Card as OriginalCard, Text } from "../ui";
 import { TextSizes } from "../ui/Text";
-import { CenteredElement } from "../ui/Layout/styles/CenteredElement";
+import { CenteredElement, CenteredFlexElement } from "../ui/Layout/styles/CenteredElement";
 import useMiniBackoffice from "../../hooks/miniBackoffice";
 import { unreachable } from "../../lib/types";
 
@@ -58,16 +58,19 @@ export const MiniBackoffice = () => {
       content = (
         <>
           <Text size={TextSizes.EXTRA_SMALL}>
-            🚫 KYC absent - click the button to your add your wallet address to
-            the KYC list.
+            🚫 KYC absent - click a button to either add your wallet address to
+            the KYC list or remove it from the Registry.
           </Text>
           <NewLine />
-          <CenteredElement>
+          <CenteredFlexElement>
             {" "}
             <Button onClick={backoffice.approveUser as () => void}>
               Add KYC
             </Button>
-          </CenteredElement>
+            <Button onClick={backoffice.unRegisterUser as () => void}>
+              Remove Wallet Address
+            </Button>
+          </CenteredFlexElement>
         </>
       );
       break;

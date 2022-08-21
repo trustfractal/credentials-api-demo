@@ -6,3 +6,8 @@ export const CenteredElement = styled.div`
     margin: auto;
   }
 `;
+
+export const CenteredFlexElement = styled(CenteredElement)`
+display: flex;
+justify-content: space-evenly;
+`
