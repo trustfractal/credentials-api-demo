@@ -4,7 +4,7 @@ import styled from "styled-components";
 import useWeb3 from "../../hooks/web3";
 import { Button, Card as OriginalCard, Text } from "../ui";
 import { TextSizes } from "../ui/Text";
-import { CenteredElement, CenteredFlexElement } from "../ui/Layout/styles/CenteredElement";
+import { CenteredElement, CenteredFlexElement } from "../ui/CenteredElement";
 import useMiniBackoffice from "../../hooks/miniBackoffice";
 import { unreachable } from "../../lib/types";
 

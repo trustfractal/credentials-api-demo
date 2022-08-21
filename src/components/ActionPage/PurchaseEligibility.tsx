@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import { Card, Text } from "../ui";
 import { TextSizes as _TextSizes } from "../ui/Text";
-import { CenteredElement } from "../ui/Layout/styles/CenteredElement";
+import { CenteredElement } from "../ui/CenteredElement";
 import fractalRegistry from "../../contracts/FractalRegistry";
 import useWeb3 from "../../hooks/web3";
 import { KYCList } from "../../hooks/miniBackoffice";

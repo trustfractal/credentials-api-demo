@@ -5,7 +5,7 @@ import { InjectedConnector } from "@web3-react/injected-connector";
 import useWeb3 from "../../hooks/web3";
 import { Button, Card, Text } from "../ui";
 import { TextSizes } from "../ui/Text";
-import { CenteredElement } from "../ui/Layout/styles/CenteredElement";
+import { CenteredElement } from "../ui/CenteredElement";
 import { GOERLI_CHAIN_ID } from "../../lib/constants";
 
 const injectedConnector = new InjectedConnector({});

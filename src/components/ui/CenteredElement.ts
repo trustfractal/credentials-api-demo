@@ -8,6 +8,6 @@ export const CenteredElement = styled.div`
 `;
 
 export const CenteredFlexElement = styled(CenteredElement)`
-display: flex;
-justify-content: space-evenly;
-`
+  display: flex;
+  justify-content: space-evenly;
+`;
