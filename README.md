@@ -1,6 +1,6 @@
-# Credentials API demo
+# Fractal DID Registry demo dapp
 
-A simple demo of our Credentials API.
+A simple demo dapp for our DID Registry.
 
 ## Stack
 

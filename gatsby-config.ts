@@ -2,8 +2,8 @@ import type { GatsbyConfig } from "gatsby";
 
 const config: GatsbyConfig = {
   siteMetadata: {
-    title: `Credentials API demo`,
-    siteUrl: `https://www.credentials-api.fractal.id`,
+    title: `DID registry API demo`,
+    siteUrl: `https://did-registry.demo.fractal.id/`,
     author: "@trustfractal",
     image: "/static/icons/favicon-32x32.png",
   },
@@ -36,8 +36,8 @@ const config: GatsbyConfig = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Credentials API demo`,
-        short_name: `creditentials-api`,
+        name: `DID registry demo`,
+        short_name: `did-registry-demo`,
         start_url: `/`,
         background_color: `#FFFFFF`,
         theme_color: `#FFFFFF`,

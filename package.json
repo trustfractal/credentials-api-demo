@@ -1,8 +1,8 @@
 {
-  "name": "credentials-api-demo",
+  "name": "did-registry-demo-dapp",
   "version": "1.0.0",
   "private": true,
-  "description": "credentials-api-demo",
+  "description": "did-registry-demo-dapp",
   "author": "Tiago Fragoso",
   "keywords": [
     "gatsby"
